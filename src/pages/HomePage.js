@@ -96,6 +96,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     </React.Fragment>
   );
 };
+console.log(process.env.REACT_PUBLIC_API);
 
 export default () => (
   <Routes>
@@ -137,7 +138,6 @@ export default () => (
     <Route path={RoutesData.DocsFolderStructure.path} element={<RouteWithSidebar component={DocsFolderStructure}/>}/>
     <Route path={RoutesData.DocsBuild.path} element={<RouteWithSidebar component={DocsBuild}/>}/>
     <Route path={RoutesData.DocsChangelog.path} element={<RouteWithSidebar component={DocsChangelog}/>}/>
-
     {/* <Navigate to={RoutesData.NotFound.path}/> */}
   </Routes>
 );

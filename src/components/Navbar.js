@@ -6,11 +6,13 @@ import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import NOTIFICATIONS_DATA from "../data/notifications";
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import { Row, Col, Nav, Form, Image, Navbar, Dropdown, Container, ListGroup, InputGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 export default (props) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const areNotificationsRead = notifications.reduce((acc, notif) => acc && notif.read, true);
+  const navigate = useNavigate();
 
   const markNotificationsAsRead = () => {
     setTimeout(() => {
@@ -18,6 +20,10 @@ export default (props) => {
     }, 300);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/examples/sign-in');
+  }
 
   const Notification = (props) => {
     const { link, sender, image, time, message, read = false } = props;
@@ -107,7 +113,7 @@ export default (props) => {
 
                 <Dropdown.Divider />
 
-                <Dropdown.Item className="fw-bold">
+                <Dropdown.Item className="fw-bold" onClick={handleLogout}>
                   <FontAwesomeIcon icon={faSignOutAlt} className="text-danger me-2" /> Logout
                 </Dropdown.Item>
               </Dropdown.Menu>

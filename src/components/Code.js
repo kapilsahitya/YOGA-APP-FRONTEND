@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Card, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { Highlight, Prism } from 'prism-react-renderer';
 
@@ -10,9 +9,15 @@ export default function Code(props){
   const { code = "", language = "jsx" } = props;
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async() => {
+    try{
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }catch(error){
+      console.log("Error:", error);
+    }
+    
   };
 
   const renderTooltip = (props) => (
@@ -38,10 +43,7 @@ export default function Code(props){
           placement="top"
           overlay={<Tooltip>Copy to clipboard</Tooltip>}
         >
-          {/* TodoMit */}
-          {/* <CopyToClipboard text={code} onCopy={handleCopy}> */}
-            <Button size="sm" variant="primary" className="copy-code-button">Copy</Button>
-          {/* </CopyToClipboard> */}
+          <Button size="sm" variant="primary" className="copy-code-button" onClick={handleCopy}>Copy</Button>
         </OverlayTrigger>
       </Card.Body>
     </Card>

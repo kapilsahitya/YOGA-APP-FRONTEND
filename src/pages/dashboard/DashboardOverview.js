@@ -1,13 +1,30 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCashRegister, faChartLine, faCloudUploadAlt, faPlus, faRocket, faTasks, faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Button, Dropdown, ButtonGroup } from "react-bootstrap";
 import { CounterWidget, CircleChartWidget, BarChartWidget, TeamMembersWidget, ProgressTrackWidget, RankingWidget, SalesValueWidget, SalesValueWidgetPhone, AcquisitionWidget } from "../../components/Widgets";
 import { PageVisitsTable } from "../../components/Tables";
 import { trafficShares, totalOrders } from "../../data/charts";
+import { getAPIData } from "../../utils/getAPIData";
 
 export default () => {
+  const [userData,setUserData] = useState([]);
+  let token = localStorage.getItem('token');
+
+  useEffect(()=>{
+    async function fetchData(){
+      let {data, error} = await getAPIData('dashboard', token);
+
+      if(!error){
+        setUserData(Object.entries(data));
+      }else{
+        console.log(error);
+      }
+    }
+    fetchData();
+  },[]);
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -55,7 +72,21 @@ export default () => {
             percentage={10.57}
           />
         </Col>
-        <Col xs={12} sm={6} xl={4} className="mb-4">
+        {userData.length > 0 && userData.map((item,index)=>{
+          return(
+            <Col xs={12} sm={6} xl={4} className="mb-4" key={index}>
+              <CounterWidget
+                category={`TOTAL ${String(item[0]).toUpperCase()}`}
+                title={item[1]}
+                period="Feb 1 - Apr 1"
+                percentage={18.2}
+                icon={faChartLine}
+                iconColor="shape-secondary"
+              />
+            </Col>    
+          )
+        })}
+        {/* <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
             category="Customers"
             title="345k"
@@ -64,9 +95,9 @@ export default () => {
             icon={faChartLine}
             iconColor="shape-secondary"
           />
-        </Col>
+        </Col> */}
 
-        <Col xs={12} sm={6} xl={4} className="mb-4">
+        {/* <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
             category="Revenue"
             title="$43,594"
@@ -75,7 +106,7 @@ export default () => {
             icon={faCashRegister}
             iconColor="shape-tertiary"
           />
-        </Col>
+        </Col> */}
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CircleChartWidget

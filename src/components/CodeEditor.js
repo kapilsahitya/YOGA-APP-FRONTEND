@@ -1,12 +1,10 @@
 
 import React, { useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Col, Row, Card, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import Code from "./Code";
-
 import themeStyle from "../assets/syntax-themes/ghcolors.json";
 
 export default function CodeEditor(props){
@@ -19,9 +17,14 @@ export default function CodeEditor(props){
     setCode(newCode);
   };
 
-  const handleCopy = () => {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async() => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
 
   return (
@@ -43,9 +46,9 @@ export default function CodeEditor(props){
           <LiveError className="alert alert-danger" />
 
           <span className="fs-7 mb-2 d-block text-gray-600">
-            {/* <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={<Tooltip>You can edit the code below and the changes will be seen in the example above.</Tooltip>}>
+            <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={<Tooltip>You can edit the code below and the changes will be seen in the example above.</Tooltip>}>
               <FontAwesomeIcon icon={faQuestionCircle} className="me-2" />
-            </OverlayTrigger> */}
+            </OverlayTrigger>
             Live React Code Editor
           </span>
 
@@ -56,15 +59,13 @@ export default function CodeEditor(props){
 
               {copied ? <span className="text-success copy-code-text">Copied</span> : null}
 
-              {/* <OverlayTrigger
+              <OverlayTrigger
                 trigger={['hover', 'focus']}
                 placement="top"
                 overlay={<Tooltip>Copy to clipboard</Tooltip>}
-              >
-                <CopyToClipboard text={code} onCopy={handleCopy}>
-                  <Button size="sm" variant="primary" className="copy-code-button">Copy</Button>
-                </CopyToClipboard>
-              </OverlayTrigger> */}
+              >                
+                <Button size="sm" variant="primary" className="copy-code-button" onClick={handleCopy}>Copy</Button>
+              </OverlayTrigger>
             </Card.Body>
           </Card>
         </Col>

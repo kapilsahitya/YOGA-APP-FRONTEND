@@ -63,20 +63,19 @@ export default () => {
   const FolderItem = (props) => {
     const { name, icon, tooltip, iconColor } = props;
     const color = iconColor ? `text-${iconColor}` : "";
-  //TodoMit
+
     return (
-      // <OverlayTrigger
-      //   trigger={['hover', 'focus']}
-      //   placement="left"
-      //   overlay={<Tooltip>{tooltip}</Tooltip>}
-      // >
+      <OverlayTrigger
+        trigger={['hover', 'focus']}
+        placement="left"
+        overlay={<Tooltip>{tooltip}</Tooltip>}
+      >
         <li data-toggle="tooltip" data-placement="left" title="Main folder that you will be working with">
           <FontAwesomeIcon icon={icon ? icon : faFolder} className={`${color} me-2`} /> {name}
         </li>
-    //  </OverlayTrigger>
+      </OverlayTrigger>
     );
   };
-//TOdoMit
   return (
     <>
       <Navbar variant="dark" expand="lg" bg="dark" className="navbar-transparent navbar-theme-primary sticky-top">
@@ -100,7 +99,7 @@ export default () => {
           </div>
         </Container>
       </Navbar>
-       <section className="section-header overflow-hidden pt-5 pt-lg-6 pb-9 pb-lg-12 bg-primary text-white" id="home">
+      <section className="section-header overflow-hidden pt-5 pt-lg-6 pb-9 pb-lg-12 bg-primary text-white" id="home">
         <Container>
           <Row>
             <Col xs={12} className="text-center">
@@ -176,8 +175,7 @@ export default () => {
               <h2>Powered by React.js</h2>
               <p className="mb-3 lead fw-bold">The most popular front-end library in the world</p>
               <p className="mb-4">Volt React is an admin dashboard template that is built using React.js components using react hooks and a data-driven structure that can kick-start your app in no time.</p>
-              to={RoutesData.DashboardOverview.path} TODOMit
-              <Button as={Link} variant="secondary" target="_blank">Live Demo <FontAwesomeIcon icon={faExternalLinkAlt} className="ms-1" /></Button>
+              <Button as={Link} to={RoutesData.DashboardOverview.path} variant="secondary" target="_blank">Live Demo <FontAwesomeIcon icon={faExternalLinkAlt} className="ms-1" /></Button>
               <Button as={HashLink} to="#download" variant="outline-primary" className="ms-3"><FontAwesomeIcon icon={faShoppingCart} className="me-1" /> Download</Button>
             </Col>
             <Col lg={6} className="order-lg-1">
@@ -190,8 +188,7 @@ export default () => {
               <p className="mb-3 lead fw-bold">100+ premium UI elements based on Bootstrap 5</p>
               <p className="mb-4">We've built over 100 React.js powered components to be used throughout your application saving you time kickstarting your project.</p>
               <p className="mb-4">Check out the components and use our live React.js component editor to try the code.</p>
-              to={RoutesData.Forms.path} TODOMit
-              <Button as={Link} variant="secondary" className="mb-5 mb-lg-0" target="_blank"><FontAwesomeIcon icon={faReact} className="me-1" /> Components examples</Button>
+              <Button as={Link} to={RoutesData.Forms.path} variant="secondary" className="mb-5 mb-lg-0" target="_blank"><FontAwesomeIcon icon={faReact} className="me-1" /> Components examples</Button>
             </Col>
             <Col lg={6} className="rounded shadow pt-3">
               <Code scope={{ Form, Button }} code={`<Form>
@@ -367,7 +364,7 @@ export default () => {
           </Row>
         </Container>
       </section>
-     <section className="section section-lg bg-white" id="download">
+      <section className="section section-lg bg-white" id="download">
         <Container>
           <Row>
             <Col xs={12} lg={8}>
@@ -466,15 +463,15 @@ export default () => {
               <h2 className="h5 text-gray fw-normal mb-4">Available in the following technologies:</h2>
               <div>
                 <Card.Link href="https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard" target="_blank" className="me-3">
-                  {/* <OverlayTrigger placement="top" trigger={['hover', 'focus']} overlay={<Tooltip>Bootstrap 5 · The most popular HTML, CSS, and JS library in the world.</Tooltip>}> */}
-                    <Image src={BS5Logo} className="image image-sm" />
-                  {/* </OverlayTrigger> */}
+                  <OverlayTrigger placement="top" trigger={['hover', 'focus']} overlay={<Tooltip>Bootstrap 5 · The most popular HTML, CSS, and JS library in the world.</Tooltip>}>
+                  <Image src={BS5Logo} className="image image-sm" />
+                  </OverlayTrigger>
                 </Card.Link>
 
                 <Card.Link href="https://themesberg.com/product/dashboard/volt-react" target="_blank" className="me-3">
-                  {/* <OverlayTrigger placement="top" trigger={['hover', 'focus']} overlay={<Tooltip>React · A JavaScript library for building user interfaces.</Tooltip>}> */}
-                    <Image src={ReactLogo} className="image image-sm" />
-                  {/* </OverlayTrigger> */}
+                  <OverlayTrigger placement="top" trigger={['hover', 'focus']} overlay={<Tooltip>React · A JavaScript library for building user interfaces.</Tooltip>}>
+                  <Image src={ReactLogo} className="image image-sm" />
+                  </OverlayTrigger>
                 </Card.Link>
               </div>
             </Col>
