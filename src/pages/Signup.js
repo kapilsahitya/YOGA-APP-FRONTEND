@@ -6,8 +6,8 @@ import { faFacebookF, faGithub, faTwitter } from "@fortawesome/free-brands-svg-i
 import { Col, Row, Form, Card, Button, FormCheck, Container, InputGroup } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
-import { RoutesData } from "../../routes";
-import BgImage from "../../assets/img/illustrations/signin.svg";
+import { RoutesData } from "../routes";
+import BgImage from "../assets/img/illustrations/signin.svg";
 
 
 export default () => {
@@ -66,7 +66,8 @@ export default () => {
                   </Button>
                 </Form>
 
-                <div className="mt-3 mb-4 text-center">
+                {/* TODOMit */}
+                {/* <div className="mt-3 mb-4 text-center">
                   <span className="fw-normal">or</span>
                 </div>
                 <div className="d-flex justify-content-center my-4">
@@ -79,7 +80,7 @@ export default () => {
                   <Button variant="outline-light" className="btn-icon-only btn-pil text-dark">
                     <FontAwesomeIcon icon={faGithub} />
                   </Button>
-                </div>
+                </div> */}
                 <div className="d-flex justify-content-center align-items-center mt-4">
                   <span className="fw-normal">
                     Already have an account?

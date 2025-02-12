@@ -22,7 +22,7 @@ export default (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/examples/sign-in');
+    navigate('/sign-in');
   }
 
   const Notification = (props) => {

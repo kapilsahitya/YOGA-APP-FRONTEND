@@ -1,5 +1,5 @@
 export const getAPIData = async (url, token) => {
-    let JsonResult = await fetch(`http://localhost:3000/admin/${url}`, {
+    let JsonResult = await fetch(`${process.env.REACT_APP_API}${url}`, {
         method: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`,
@@ -10,33 +10,40 @@ export const getAPIData = async (url, token) => {
     if (JsonResult.ok && JsonResult.status === 200) {
         return ({
             data: result,
+            status:JsonResult.status,
             error: false
         })
     } else {
         return ({
             data: result,
+            status:JsonResult.status,
             error: true
         })
     }
 }
 
-export const postAPIData = async (url, data) =>{
-    let JsonResult = await fetch(`http://localhost:3000/admin/${url}`, {
+export const postAPIData = async (url, data, token) =>{
+    let JsonResult = await fetch(`${process.env.REACT_APP_API}${url}`, {
         method: 'POST',
-        headers: {
+        headers: token ? {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": 'application/json'
+        } : {
             "Content-Type": 'application/json'
         },
         body: JSON.stringify(data)
     });
     let result = await JsonResult.json();
-    if (JsonResult.ok && JsonResult.status === 200) {
+    if (JsonResult.ok && (JsonResult.status === 200 || JsonResult.status === 201)) {
         return ({
             data: result,
+            status:JsonResult.status,
             error: false
         })
     } else {
         return ({
             data: result,
+            status:JsonResult.status,
             error: true
         })
     }

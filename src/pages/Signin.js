@@ -5,10 +5,10 @@ import { faAngleLeft, faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-sv
 import { faFacebookF, faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Col, Row, Form, Card, Button, FormCheck, Container, InputGroup, Toast } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
-import { RoutesData } from "../../routes";
-import BgImage from "../../assets/img/illustrations/signin.svg";
+import { RoutesData } from "../routes";
+import BgImage from "../assets/img/illustrations/signin.svg";
 import { useForm } from "react-hook-form";
-import { postAPIData } from "../../utils/getAPIData";
+import { postAPIData } from "../utils/getAPIData";
 
 export default () => {
   const {
@@ -19,7 +19,7 @@ export default () => {
   const navigate = useNavigate();
   
   const handleLogin = async (Values) => {
-    let {data, error} = await postAPIData('login', Values);
+    let {data, error} = await postAPIData('/login', Values);
     
     if(!error){
       localStorage.setItem('token', data.token)
@@ -45,7 +45,7 @@ export default () => {
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h3 className="mb-0">Sign in to our platform</h3>
                 </div>
-                <Form className="mt-4" onSubmit={handleSubmit(handleLogin)}>
+                <Form className="mt-4 mb-4" onSubmit={handleSubmit(handleLogin)}>
                   <Form.Group id="email" className="mb-4">
                     <Form.Label>Your Email</Form.Label>
                     <InputGroup>
@@ -70,15 +70,17 @@ export default () => {
                         <FormCheck.Input id="defaultCheck5" className="me-2" />
                         <FormCheck.Label htmlFor="defaultCheck5" className="mb-0">Remember me</FormCheck.Label>
                       </Form.Check>
-                      <Card.Link className="small text-end">Lost password?</Card.Link>
+                      {/* TODOMit */}
+                      {/* <Card.Link className="small text-end">Lost password?</Card.Link> */}
                     </div>
                   </Form.Group>
-                  <Button variant="primary" type="submit" className="w-100">
+                  <Button variant="primary" type="submit" className="w-100 mt-4">
                     Sign in
                   </Button>
                 </Form>
 
-                <div className="mt-3 mb-4 text-center">
+                {/* TODOMit */}
+                {/* <div className="mt-3 mb-4 text-center">
                   <span className="fw-normal">or login with</span>
                 </div>
                 <div className="d-flex justify-content-center my-4">
@@ -91,15 +93,15 @@ export default () => {
                   <Button variant="outline-light" className="btn-icon-only btn-pil text-dark">
                     <FontAwesomeIcon icon={faGithub} />
                   </Button>
-                </div>
-                <div className="d-flex justify-content-center align-items-center mt-4">
+                </div> */}
+                {/* <div className="d-flex justify-content-center align-items-center mt-4">
                   <span className="fw-normal">
                     Not registered?
                     <Card.Link as={Link} to={RoutesData.Signup.path} className="fw-bold">
                       {` Create account `}
                     </Card.Link>
                   </span>
-                </div>
+                </div> */}
               </div>
             </Col>
           </Row>

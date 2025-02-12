@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Breadcrumb } from "react-bootstrap";
-import { PageTrafficTable, RankingTable } from "../../components/Tables";
+import { CommandsTable, PageTrafficTable, PageVisitsTable, RankingTable, TransactionsTable } from "../../components/Tables";
 
 export default () => {
   return (
@@ -22,8 +22,11 @@ export default () => {
         </div>
       </div>
 
-      <PageTrafficTable />
+      {/* <PageTrafficTable /> */}
       <RankingTable />
+      <PageVisitsTable/>
+      <TransactionsTable/>
+      <CommandsTable/>
     </>
   );
 };

@@ -101,8 +101,11 @@ export default (props = {}) => {
             <Nav className="flex-column pt-3 pt-md-0">
               <NavItem title="Volt React" link={RoutesData.Presentation.path} image={ReactHero} />
 
+              <NavItem title="Exercise" link={RoutesData.Exercise.path} icon={faChartPie} />
+              <NavItem title="Category" link={RoutesData.Categories.path} icon={faChartPie} />
+
               <NavItem title="Overview" link={RoutesData.DashboardOverview.path} icon={faChartPie} />
-              <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} />
+              {/* <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
               <NavItem title="Transactions" icon={faHandHoldingUsd} link={RoutesData.Transactions.path} />
               <NavItem title="Settings" icon={faCog} link={RoutesData.Settings.path} />
               <NavItem external title="Calendar" link="https://demo.themesberg.com/volt-pro-react/#/calendar" target="_blank" badgeText="Pro" icon={faCalendarAlt} />

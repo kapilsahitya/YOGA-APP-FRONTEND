@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Form, Card, Button, Container, InputGroup } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-
-import { RoutesData } from "../../routes";
+import { RoutesData } from "../routes";
 
 
 export default () => {

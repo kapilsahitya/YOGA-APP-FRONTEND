@@ -1,4 +1,3 @@
-
 export const RoutesData = {
     // pages
     Presentation: { path: "/" },
@@ -7,15 +6,19 @@ export const RoutesData = {
     Settings: { path: "/settings" },
     Upgrade: { path: "/upgrade" },
     BootstrapTables: { path: "/tables/bootstrap-tables" },
-    Billing: { path: "/examples/billing" },
-    Invoice: { path: "/examples/invoice" },
-    Signin: { path: "/examples/sign-in" },
-    Signup: { path: "/examples/sign-up" },
-    ForgotPassword: { path: "/examples/forgot-password" },
-    ResetPassword: { path: "/examples/reset-password" },
-    Lock: { path: "/examples/lock" },
-    NotFound: { path: "/examples/404" },
-    ServerError: { path: "/examples/500" },
+    Billing: { path: "/billing" },
+    Invoice: { path: "/invoice" },
+    Signin: { path: "/sign-in" },
+    Signup: { path: "/sign-up" },
+    ForgotPassword: { path: "/forgot-password" },
+    ResetPassword: { path: "/reset-password" },
+    Lock: { path: "/lock" },
+    NotFound: { path: "/404" },
+    ServerError: { path: "/500" },
+
+    Categories: { path: "/category"},
+    Exercise: { path: "/exercise"},
+    AddExercise: { path: "/exercise/add"},
 
     // docs
     DocsOverview: { path: "/documentation/overview" },

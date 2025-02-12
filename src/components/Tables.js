@@ -1,8 +1,8 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faEdit, faEllipsisH, faExternalLinkAlt, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagination, ButtonGroup } from "react-bootstrap";
+import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagination, ButtonGroup, Form } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 import { RoutesData } from "../routes";
@@ -72,13 +72,39 @@ export const PageVisitsTable = () => {
   );
 };
 
-export const PageTrafficTable = () => {
+export const ToggleSwitch = ({activity}) => {
+  const [switchChecked, setSwitchChecked] = useState(activity == 1 ? true : false);
+
+  return(
+    <Form.Check type="switch" checked={switchChecked} onChange={()=>setSwitchChecked(!switchChecked)}/>
+  )
+}
+
+export const PageTrafficTable = ({ data }) => {
   const TableRow = (props) => {
-    const { id, source, sourceIcon, sourceIconColor, sourceType, category, rank, trafficShare, change } = props;
+    // const { id, source, sourceIcon, sourceIconColor, sourceType, category, rank, trafficShare, change } = props;
 
     return (
       <tr>
-        <td>
+        {Object.entries(props).map((value, index) => {
+          return (
+            <td key={index}>
+              {value[0] === "Image" ? (
+                <Image src="https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg" style={{ height: 50, width: 50 }} />
+              ) : (value[0] === "Pro" || value[0] === "Active") ? (
+                <ToggleSwitch activity={value[1]}/>
+              ) : value[0] === "Action" ? (
+                <React.Fragment>
+                  <Button variant="outline-secondary" className="mx-1"><FontAwesomeIcon icon={faEdit} /> Edit</Button>
+                  <Button variant="outline-danger" className="mx-1"><FontAwesomeIcon icon={faTrashAlt} /> Delete</Button>
+                </React.Fragment>
+              ) : value[1]?.type === "Button" ? (
+                <Button variant="outline-primary" className="mx-1">{value[1].label}</Button>
+              ) : value[1]}
+            </td>
+          )
+        })}
+        {/* <td>
           <Card.Link href="#" className="text-primary fw-bold">{id}</Card.Link>
         </td>
         <td className="fw-bold">
@@ -100,7 +126,7 @@ export const PageTrafficTable = () => {
         </td>
         <td>
           <ValueChange value={change} suffix="%" />
-        </td>
+        </td> */}
       </tr>
     );
   };
@@ -111,17 +137,13 @@ export const PageTrafficTable = () => {
         <Table responsive className="table-centered table-nowrap rounded mb-0">
           <thead className="thead-light">
             <tr>
-              <th className="border-0">#</th>
-              <th className="border-0">Traffic Source</th>
-              <th className="border-0">Source Type</th>
-              <th className="border-0">Category</th>
-              <th className="border-0">Global Rank</th>
-              <th className="border-0">Traffic Share</th>
-              <th className="border-0">Change</th>
+              {data.length > 0 && Object.keys(data[0]).map((key, index) => (
+                <th className="border-0" key={index}>{key === 'Id' ? '#' : key.replace("_"," ")}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {pageTraffic.map(pt => <TableRow key={`page-traffic-${pt.id}`} {...pt} />)}
+            {data.map(value => (<TableRow key={`page-traffic-${value.Id}`} {...value} />))}
           </tbody>
         </Table>
       </Card.Body>

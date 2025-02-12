@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Card, Image, Button, Container } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { RoutesData } from "../../routes";
-import NotFoundImage from "../../assets/img/illustrations/404.svg";
+import { RoutesData } from "../routes";
+import NotFoundImage from "../assets/img/illustrations/404.svg";
 
 export default () => {
   return (

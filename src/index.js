@@ -7,6 +7,7 @@ import "./scss/volt.scss";
 
 // vendor styles
 import "react-datetime/css/react-datetime.css";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/ScrollToTop";

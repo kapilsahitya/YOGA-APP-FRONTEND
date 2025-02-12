@@ -7,19 +7,24 @@ import { CounterWidget, CircleChartWidget, BarChartWidget, TeamMembersWidget, Pr
 import { PageVisitsTable } from "../../components/Tables";
 import { trafficShares, totalOrders } from "../../data/charts";
 import { getAPIData } from "../../utils/getAPIData";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
   const [userData,setUserData] = useState([]);
+  const navigate = useNavigate();
   let token = localStorage.getItem('token');
 
   useEffect(()=>{
     async function fetchData(){
-      let {data, error} = await getAPIData('dashboard', token);
+      let {data, error, status} = await getAPIData('/dashboard', token);
 
       if(!error){
         setUserData(Object.entries(data));
       }else{
-        console.log(error);
+        if(status === 401){
+          localStorage.removeItem('token');
+          navigate('/sign-in');
+        }
       }
     }
     fetchData();
@@ -58,7 +63,7 @@ export default () => {
       </div>
 
       <Row className="justify-content-md-center">
-        <Col xs={12} className="mb-4 d-none d-sm-block">
+        {/* <Col xs={12} className="mb-4 d-none d-sm-block">
           <SalesValueWidget
             title="Sales Value"
             value="10,567"
@@ -71,7 +76,7 @@ export default () => {
             value="10,567"
             percentage={10.57}
           />
-        </Col>
+        </Col> */}
         {userData.length > 0 && userData.map((item,index)=>{
           return(
             <Col xs={12} sm={6} xl={4} className="mb-4" key={index}>
@@ -108,14 +113,14 @@ export default () => {
           />
         </Col> */}
 
-        <Col xs={12} sm={6} xl={4} className="mb-4">
+        {/* <Col xs={12} sm={6} xl={4} className="mb-4">
           <CircleChartWidget
             title="Traffic Share"
             data={trafficShares} />
-        </Col>
+        </Col> */}
       </Row>
 
-      <Row>
+      {/* <Row>
         <Col xs={12} xl={12} className="mb-4">
           <Row>
             <Col xs={12} xl={8} className="mb-4">
@@ -155,7 +160,7 @@ export default () => {
             </Col>
           </Row>
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 };
