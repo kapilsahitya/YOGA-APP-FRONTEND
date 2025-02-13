@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 
-const InputField = ({ label, type, placeholder, required, setValue, ...props }) => {
+const InputField = ({ label, type, placeholder, required, setValue, row, ...props }) => {
     const [editorState,setEditorState] = useState(EditorState.createEmpty());
 
     const onEditorStateChange = (state) => {
@@ -25,6 +25,8 @@ const InputField = ({ label, type, placeholder, required, setValue, ...props }) 
                         wrapperClassName="form-control px-0"
                         editorClassName="editorClassName"
                     />
+                ) : type === "textarea" ? (
+                    <Form.Control as="textarea" rows={row} placeholder={placeholder} required={required} {...props}/>
                 ) : (
                     <Form.Control type={type} placeholder={placeholder} required={required} {...props}/>
                 )}

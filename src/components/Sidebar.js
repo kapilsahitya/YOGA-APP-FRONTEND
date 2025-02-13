@@ -102,7 +102,11 @@ export default (props = {}) => {
               <NavItem title="Volt React" link={RoutesData.Presentation.path} image={ReactHero} />
 
               <NavItem title="Exercise" link={RoutesData.Exercise.path} icon={faChartPie} />
+              <NavItem title="Challenges" link={RoutesData.Challenges.path} icon={faChartPie} />
               <NavItem title="Category" link={RoutesData.Categories.path} icon={faChartPie} />
+              <NavItem title="Discover" link={RoutesData.Discover.path} icon={faChartPie} />
+              <NavItem title="Quick Workout" link={RoutesData.QuickWorkout.path} icon={faChartPie} />
+              <NavItem title="Stretches" link={RoutesData.Stretches.path} icon={faChartPie} />
 
               <NavItem title="Overview" link={RoutesData.DashboardOverview.path} icon={faChartPie} />
               {/* <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}

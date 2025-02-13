@@ -16,9 +16,18 @@ export const RoutesData = {
     NotFound: { path: "/404" },
     ServerError: { path: "/500" },
 
-    Categories: { path: "/category"},
     Exercise: { path: "/exercise"},
+    Challenges: { path: "/challenges"},
+    Categories: { path: "/category"},
+    Discover: { path: "/discover"},
+    QuickWorkout: { path: "/workout"},
+    Stretches: { path: "/stretches"},
     AddExercise: { path: "/exercise/add"},
+    AddChallenge: { path: "/challenges/add"},
+    AddCategory: { path: "/category/add"},
+    AddDiscover: { path: "/discover/add"},
+    AddQuickWorkout: { path: "/workout/add"},
+    AddStretches: { path: "/stretches/add"},
 
     // docs
     DocsOverview: { path: "/documentation/overview" },

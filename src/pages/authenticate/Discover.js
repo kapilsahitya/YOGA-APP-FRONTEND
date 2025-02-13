@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { getAPIData } from "../../utils/getAPIData";
 import { useNavigate } from "react-router-dom";
-import { PageTrafficTable } from "../../components/Tables";
+import { getAPIData } from "../../utils/getAPIData";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { PageTrafficTable } from "../../components/Tables";
 
-const Categories = () => {
-    const [categoriesData, setCategoriesData] = useState([]);
+const Discover = () => {
+    const [discoverData, setDiscoverData] = useState([]);
     const navigate = useNavigate();
     let token = localStorage.getItem('token');
 
     useEffect(() => {
         async function fetchData() {
-            let { data, error, status } = await getAPIData('/category', token);
+            let { data, error, status } = await getAPIData('/discover', token);
 
             if (!error) {
-                if (data.categories.length > 0) {
-                    data.categories.map((item) => {
-                        setCategoriesData((prev) => [...prev, {
-                            Id: item.categoryId,
+                if (data.discovers.length > 0) {
+                    data.discovers.map((item) => {
+                        setDiscoverData((prev) => [...prev, {
+                            Id: item.discoverId,
                             Image: item.image,
-                            Category: item.category,
+                            Discover: item.discover,
                             Description: item.description,
                             View_Exercise: {
                                 label: "View Exercise",
@@ -42,14 +42,13 @@ const Categories = () => {
         fetchData();
     }, []);
 
-
-    return (
+    return(
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={()=>navigate('/category/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Category
+            <Button variant="primary" className="my-2" onClick={()=>navigate('/discover/add')}>
+                <FontAwesomeIcon icon={faPlus} /> Add New Discover
             </Button>
-            {categoriesData.length > 0 && <PageTrafficTable data={categoriesData} />}
+            {discoverData.length > 0 && <PageTrafficTable data={discoverData} />}
         </React.Fragment>
     )
 };
-export default Categories;
+export default Discover;

@@ -51,6 +51,15 @@ import Toasts from "./components/Toasts";
 import Categories from './authenticate/Categories';
 import Exercise from './authenticate/Exercise';
 import AddExercise from './authenticate/AddExercise';
+import Challenges from './authenticate/Challenges';
+import Discover from './authenticate/Discover';
+import QuickWorkout from './authenticate/QuickWorkout';
+import Stretches from './authenticate/Stretches';
+import AddChallenge from './authenticate/AddChallenge';
+import AddCategory from './authenticate/AddCategory';
+import AddDiscover from './authenticate/AddDiscover';
+import AddWorkout from './authenticate/AddWorkout';
+import AddStretches from './authenticate/AddStreches';
 
 const RouteWithLoader = ({ component: Component, isAuth,...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -125,7 +134,16 @@ export default () => {
 
       <Route path={RoutesData.Categories.path} element={<RouteWithSidebar component={Categories}/>}/>
       <Route path={RoutesData.Exercise.path} element={<RouteWithSidebar component={Exercise}/>}/>
+      <Route path={RoutesData.Challenges.path} element={<RouteWithSidebar component={Challenges}/>}/>
+      <Route path={RoutesData.Discover.path} element={<RouteWithSidebar component={Discover}/>}/>
+      <Route path={RoutesData.QuickWorkout.path} element={<RouteWithSidebar component={QuickWorkout}/>}/>
+      <Route path={RoutesData.Stretches.path} element={<RouteWithSidebar component={Stretches}/>}/>
       <Route path={RoutesData.AddExercise.path} element={<RouteWithSidebar component={AddExercise}/>}/>
+      <Route path={RoutesData.AddChallenge.path} element={<RouteWithSidebar component={AddChallenge}/>}/>
+      <Route path={RoutesData.AddCategory.path} element={<RouteWithSidebar component={AddCategory}/>}/>
+      <Route path={RoutesData.AddDiscover.path} element={<RouteWithSidebar component={AddDiscover}/>}/>
+      <Route path={RoutesData.AddQuickWorkout.path} element={<RouteWithSidebar component={AddWorkout}/>}/>
+      <Route path={RoutesData.AddStretches.path} element={<RouteWithSidebar component={AddStretches}/>}/>
 
       <Route path={RoutesData.DashboardOverview.path} element={<RouteWithSidebar component={DashboardOverview} isAuth={isAuth}/>}/>  
       <Route path={RoutesData.Upgrade.path} element={<RouteWithSidebar component={Upgrade} isAuth={isAuth}/>}/>  

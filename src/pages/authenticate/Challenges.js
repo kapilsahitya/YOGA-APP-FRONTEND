@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { getAPIData } from "../../utils/getAPIData";
 import { useNavigate } from "react-router-dom";
 import { PageTrafficTable } from "../../components/Tables";
+import { getAPIData } from "../../utils/getAPIData";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const Categories = () => {
-    const [categoriesData, setCategoriesData] = useState([]);
+const Challenges = () => {
+    const [challengesData, setChallengesData] = useState([]);
     const navigate = useNavigate();
     let token = localStorage.getItem('token');
 
     useEffect(() => {
         async function fetchData() {
-            let { data, error, status } = await getAPIData('/category', token);
+            let { data, error, status } = await getAPIData('/challenges', token);
 
             if (!error) {
-                if (data.categories.length > 0) {
-                    data.categories.map((item) => {
-                        setCategoriesData((prev) => [...prev, {
-                            Id: item.categoryId,
+                if (data.challenges.length > 0) {
+                    data.challenges.map((item) => {
+                        setChallengesData((prev) => [...prev, {
+                            Id: item.challengesId,
                             Image: item.image,
-                            Category: item.category,
+                            Challenges_Name: item.challengesName,
                             Description: item.description,
-                            View_Exercise: {
-                                label: "View Exercise",
+                            Add_Week: {
+                                label: "View Week",
                                 type: "Button"
                             },
                             Pro: item.isActive,
@@ -42,14 +42,13 @@ const Categories = () => {
         fetchData();
     }, []);
 
-
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={()=>navigate('/category/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Category
+            <Button variant="primary" className="my-2" onClick={()=>navigate('/challenges/add')}>
+                <FontAwesomeIcon icon={faPlus} /> Add New Challenges
             </Button>
-            {categoriesData.length > 0 && <PageTrafficTable data={categoriesData} />}
+            {challengesData.length > 0 && <PageTrafficTable data={challengesData} />}
         </React.Fragment>
     )
 };
-export default Categories;
+export default Challenges;

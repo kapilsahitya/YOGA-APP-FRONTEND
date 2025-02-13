@@ -5,11 +5,10 @@ import InputField from "../../utils/InputField";
 import { postAPIData } from "../../utils/getAPIData";
 import { useNavigate } from "react-router-dom";
 
-const AddExercise = () => {
+const AddStretches = () => {
     const {
         register,
         handleSubmit,
-        setValue,
         formState: { errors }
     } = useForm();
     const navigate = useNavigate();
@@ -17,33 +16,33 @@ const AddExercise = () => {
     let token = localStorage.getItem('token');
 
     const submitData = async (values) => {
-        let { data, error, status } = await postAPIData('/addexercise', values, token);
+        // let { data, error, status } = await postAPIData('/addexercise', values, token);
 
-        if(!error){
-            console.log(data);
-        }else{
-            if (status === 401) {
-                localStorage.removeItem('token');
-                navigate('/sign-in');
-            }
-        }
+        // if(!error){
+        //     console.log(data);
+        // }else{
+        //     if (status === 401) {
+        //         localStorage.removeItem('token');
+        //         navigate('/sign-in');
+        //     }
+        // }
     }
 
     return (
         <Card border="light" className="bg-white shadow-sm mb-4">
             <Card.Body>
-                <h5 className="mb-4">Add Exercise</h5>
+                <h5 className="mb-4">Add New Stretches</h5>
                 <Form onSubmit={handleSubmit(submitData)}>
                     <InputField
-                        label="Exercise Name"
+                        label="Stretches"
                         type="text"
-                        placeholder="Enter your exercise name"
+                        placeholder="Stretches"
                         required={true}
-                        {...register('exerciseName')}
+                        {...register('stretches')}
                     />
 
                     <InputField
-                        label="Exercise Image"
+                        label="Stretches Image"
                         type="file"
                         required={true}
                         {...register('image')}
@@ -51,25 +50,19 @@ const AddExercise = () => {
 
                     <InputField
                         label="Description"
-                        type="rte"
+                        type="textarea"
+                        row="5"
+                        placeholder="Description..."
                         required={true}
-                        setValue={setValue}
                         {...register('description')}
                     />
 
-                    <InputField
-                        label="Exercise Time (in minutes)"
-                        type="number"
-                        placeholder="0"
-                        required={true}
-                        {...register('exerciseTime')}
-                    />
                     <Button variant="primary" type="submit" className="mt-4">
-                        Add Exercise
+                        Add Stretches
                     </Button>
                 </Form>
             </Card.Body>
         </Card>
     )
 };
-export default AddExercise;
+export default AddStretches;
