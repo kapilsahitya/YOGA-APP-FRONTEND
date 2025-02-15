@@ -81,15 +81,15 @@ export default (props = {}) => {
           <div className="sidebar-inner px-4 pt-3">
             <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
               <div className="d-flex align-items-center">
-                <div className="user-avatar lg-avatar me-4">
+                {/* <div className="user-avatar lg-avatar me-4">
                   <Image src={ProfilePicture} className="card-img-top rounded-circle border-white" />
-                </div>
-                <div className="d-block">
+                </div> */}
+                {/* <div className="d-block">
                   <h6>Hi, Jane</h6>
                   <Button as={Link} variant="secondary" size="xs" to={RoutesData.Signin.path} className="text-dark">
                     <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Sign Out
                   </Button>
-                </div>
+                </div> */}
               </div>
               <Nav.Link onClick={onCollapse} className="collapse-close d-md-none" as={Link}>
                 <FontAwesomeIcon icon={faTimes} />
@@ -108,18 +108,19 @@ export default (props = {}) => {
               <NavItem title="Quick Workout" link={RoutesData.QuickWorkout.path} icon={faChartPie} />
               <NavItem title="Stretches" link={RoutesData.Stretches.path} icon={faChartPie} />
 
-              <NavItem title="Overview" link={RoutesData.DashboardOverview.path} icon={faChartPie} />
+              {/* <NavItem title="Overview" link={RoutesData.DashboardOverview.path} icon={faChartPie} /> */}
               {/* <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
-              <NavItem title="Transactions" icon={faHandHoldingUsd} link={RoutesData.Transactions.path} />
+              {/* <NavItem title="Transactions" icon={faHandHoldingUsd} link={RoutesData.Transactions.path} /> */}
               <NavItem title="Settings" icon={faCog} link={RoutesData.Settings.path} />
-              <NavItem external title="Calendar" link="https://demo.themesberg.com/volt-pro-react/#/calendar" target="_blank" badgeText="Pro" icon={faCalendarAlt} />
-              <NavItem external title="Map" link="https://demo.themesberg.com/volt-pro-react/#/map" target="_blank" badgeText="Pro" icon={faMapPin} />
+              <NavItem title="Users" icon={faCog} link={RoutesData.Users.path} />
+              {/* <NavItem external title="Calendar" link="https://demo.themesberg.com/volt-pro-react/#/calendar" target="_blank" badgeText="Pro" icon={faCalendarAlt} /> */}
+              {/* <NavItem external title="Map" link="https://demo.themesberg.com/volt-pro-react/#/map" target="_blank" badgeText="Pro" icon={faMapPin} /> */}
 
-              <CollapsableNavItem eventKey="tables/" title="Tables" icon={faTable}>
+              {/* <CollapsableNavItem eventKey="tables/" title="Tables" icon={faTable}>
                 <NavItem title="Bootstrap Table" link={RoutesData.BootstrapTables.path} />
-              </CollapsableNavItem>
+              </CollapsableNavItem> */}
 
-              <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}>
+              {/* <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}>
                 <NavItem title="Sign In" link={RoutesData.Signin.path} />
                 <NavItem title="Sign Up" link={RoutesData.Signup.path} />
                 <NavItem title="Forgot password" link={RoutesData.ForgotPassword.path} />
@@ -127,13 +128,13 @@ export default (props = {}) => {
                 <NavItem title="Lock" link={RoutesData.Lock.path} />
                 <NavItem title="404 Not Found" link={RoutesData.NotFound.path} />
                 <NavItem title="500 Server Error" link={RoutesData.ServerError.path} />
-              </CollapsableNavItem>
+              </CollapsableNavItem> */}
 
-              <NavItem external title="Plugins" link="https://demo.themesberg.com/volt-pro-react/#/plugins/datatable" target="_blank" badgeText="Pro" icon={faChartPie} />
+              {/* <NavItem external title="Plugins" link="https://demo.themesberg.com/volt-pro-react/#/plugins/datatable" target="_blank" badgeText="Pro" icon={faChartPie} /> */}
 
-              <Dropdown.Divider className="my-3 border-indigo" />
+              {/* <Dropdown.Divider className="my-3 border-indigo" /> */}
 
-              <CollapsableNavItem eventKey="documentation/" title="Getting Started" icon={faBook}>
+              {/* <CollapsableNavItem eventKey="documentation/" title="Getting Started" icon={faBook}>
                 <NavItem title="Overview" link={RoutesData.DocsOverview.path} />
                 <NavItem title="Download" link={RoutesData.DocsDownload.path} />
                 <NavItem title="Quick Start" link={RoutesData.DocsQuickStart.path} />
@@ -160,9 +161,9 @@ export default (props = {}) => {
                 <NavItem title="Tabs" link={RoutesData.Tabs.path} />
                 <NavItem title="Toasts" link={RoutesData.Toasts.path} />
                 <NavItem title="Tooltips" link={RoutesData.Tooltips.path} />
-              </CollapsableNavItem>
-              <NavItem external title="Themesberg" link="https://themesberg.com" target="_blank" image={ThemesbergLogo} />
-              <Button as={Link} to={RoutesData.Upgrade.path} variant="secondary" className="upgrade-to-pro"><FontAwesomeIcon icon={faRocket} className="me-1" /> Upgrade to Pro</Button>
+              </CollapsableNavItem> */}
+              {/* <NavItem external title="Themesberg" link="https://themesberg.com" target="_blank" image={ThemesbergLogo} /> */}
+              {/* <Button as={Link} to={RoutesData.Upgrade.path} variant="secondary" className="upgrade-to-pro"><FontAwesomeIcon icon={faRocket} className="me-1" /> Upgrade to Pro</Button> */}
             </Nav>
           </div>
         </SimpleBar>
