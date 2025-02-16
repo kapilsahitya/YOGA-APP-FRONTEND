@@ -16,16 +16,18 @@ const AddDiscover = () => {
     let token = localStorage.getItem('token');
 
     const submitData = async (values) => {
-        // let { data, error, status } = await postAPIData('/addexercise', values, token);
+        let { data, error, status } = await postAPIData('/addDiscover', values, token);
 
-        // if(!error){
-        //     console.log(data);
-        // }else{
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         navigate('/sign-in');
-        //     }
-        // }
+        if (!error) {
+            if (status === 201) {
+                navigate('/admin/discover');
+            }
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
     }
 
     return (
@@ -38,7 +40,14 @@ const AddDiscover = () => {
                         type="text"
                         placeholder="Discover"
                         required={true}
-                        {...register('discover')}
+                        {...register('discoverName')}
+                    />
+
+                    <InputField
+                        label="Discover Image"
+                        type="file"
+                        required={true}
+                        {...register('image')}
                     />
 
                     <InputField
@@ -48,13 +57,6 @@ const AddDiscover = () => {
                         placeholder="Description"
                         required={true}
                         {...register('description')}
-                    />
-
-                    <InputField
-                        label="Discover Image"
-                        type="file"
-                        required={true}
-                        {...register('image')}
                     />
 
                     <Button variant="primary" type="submit" className="mt-4">

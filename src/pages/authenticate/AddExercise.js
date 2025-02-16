@@ -19,14 +19,14 @@ const AddExercise = () => {
     const submitData = async (values) => {
         let { data, error, status } = await postAPIData('/addexercise', values, token);
 
-        if(!error){
-            if(status === 201){
-                navigate('/exercise');
+        if (!error) {
+            if (status === 201) {
+                navigate('/admin/exercise');
             }
-        }else{
+        } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
     }
@@ -52,14 +52,6 @@ const AddExercise = () => {
                     />
 
                     <InputField
-                        label="Description"
-                        type="rte"
-                        required={true}
-                        setValue={setValue}
-                        {...register('description')}
-                    />
-
-                    <InputField
                         label="Exercise Time (in minutes)"
                         type="number"
                         placeholder="0"
@@ -67,6 +59,15 @@ const AddExercise = () => {
                         required={true}
                         {...register('exerciseTime')}
                     />
+
+                    <InputField
+                        label="Description"
+                        type="rte"
+                        required={true}
+                        setValue={setValue}
+                        {...register('description')}
+                    />
+
                     <Button variant="primary" type="submit" className="mt-4">
                         Add Exercise
                     </Button>

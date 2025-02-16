@@ -16,29 +16,38 @@ const AddWorkout = () => {
     let token = localStorage.getItem('token');
 
     const submitData = async (values) => {
-        // let { data, error, status } = await postAPIData('/addexercise', values, token);
+        let { data, error, status } = await postAPIData('/addQuickworkout', values, token);
 
-        // if(!error){
-        //     console.log(data);
-        // }else{
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         navigate('/sign-in');
-        //     }
-        // }
+        if (!error) {
+            if (status === 201) {
+                navigate('/admin/workout');
+            }
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
     }
 
     return (
         <Card border="light" className="bg-white shadow-sm mb-4">
             <Card.Body>
-                <h5 className="mb-4">Add New Category</h5>
+                <h5 className="mb-4">Add New Workout</h5>
                 <Form onSubmit={handleSubmit(submitData)}>
                     <InputField
-                        label="Categoty"
+                        label="Workout"
                         type="text"
-                        placeholder="Categoty"
+                        placeholder="Workout"
                         required={true}
-                        {...register('category')}
+                        {...register('quickworkoutName')}
+                    />
+
+                    <InputField
+                        label="Workout Image"
+                        type="file"
+                        required={true}
+                        {...register('image')}
                     />
 
                     <InputField
@@ -50,15 +59,8 @@ const AddWorkout = () => {
                         {...register('description')}
                     />
 
-                    <InputField
-                        label="Category Image"
-                        type="file"
-                        required={true}
-                        {...register('image')}
-                    />
-
                     <Button variant="primary" type="submit" className="mt-4">
-                        Add Category
+                        Add Workout
                     </Button>
                 </Form>
             </Card.Body>

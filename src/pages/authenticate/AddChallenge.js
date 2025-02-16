@@ -9,24 +9,26 @@ const AddChallenge = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
     } = useForm();
     const navigate = useNavigate();
 
-    let token = localStorage.getItem('token');
+    let token = localStorage.getItem("token");
 
     const submitData = async (values) => {
-        // let { data, error, status } = await postAPIData('/addexercise', values, token);
+        let { data, error, status } = await postAPIData("/addChallenges", values, token);
 
-        // if(!error){
-        //     console.log(data);
-        // }else{
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         navigate('/sign-in');
-        //     }
-        // }
-    }
+        if (!error) {
+            if (status === 201) {
+                navigate("/admin/challenges");
+            }
+        } else {
+            if (status === 401) {
+                localStorage.removeItem("token");
+                navigate("/");
+            }
+        }
+    };
 
     return (
         <Card border="light" className="bg-white shadow-sm mb-4">
@@ -38,7 +40,14 @@ const AddChallenge = () => {
                         type="text"
                         placeholder="Enter your challenge name"
                         required={true}
-                        {...register('challengesName')}
+                        {...register("challengesName")}
+                    />
+
+                    <InputField
+                        label="Challenges Image"
+                        type="file"
+                        required={true}
+                        {...register("image")}
                     />
 
                     <InputField
@@ -47,14 +56,7 @@ const AddChallenge = () => {
                         row="3"
                         placeholder="Description"
                         required={true}
-                        {...register('description')}
-                    />
-
-                    <InputField
-                        label="Challenges Image"
-                        type="file"
-                        required={true}
-                        {...register('image')}
+                        {...register("description")}
                     />
 
                     <Button variant="primary" type="submit" className="mt-4">
@@ -63,6 +65,6 @@ const AddChallenge = () => {
                 </Form>
             </Card.Body>
         </Card>
-    )
+    );
 };
 export default AddChallenge;

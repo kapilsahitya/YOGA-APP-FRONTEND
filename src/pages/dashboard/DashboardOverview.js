@@ -23,7 +23,7 @@ export default () => {
       }else{
         if(status === 401){
           localStorage.removeItem('token');
-          navigate('/sign-in');
+          navigate('/');
         }
       }
     }

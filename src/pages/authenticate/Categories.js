@@ -55,7 +55,7 @@ const Categories = () => {
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
     }
@@ -72,7 +72,7 @@ const Categories = () => {
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
         setShowModal(false);
@@ -86,7 +86,7 @@ const Categories = () => {
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
         setDeleteUser({ Id: 0, IsConfirmed: false })
@@ -94,7 +94,7 @@ const Categories = () => {
 
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={() => navigate('/category/add')}>
+            <Button variant="primary" className="my-2" onClick={() => navigate('/admin/category/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Category
             </Button>
             {categoriesData.length > 0 && <PageTrafficTable data={categoriesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} />}

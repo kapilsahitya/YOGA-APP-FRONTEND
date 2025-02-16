@@ -23,7 +23,7 @@ export default () => {
     
     if(!error){
       localStorage.setItem('token', data.token)
-      navigate('/dashboard/overview');
+      navigate('/dashboard');
     }
     else{
       console.log(data);

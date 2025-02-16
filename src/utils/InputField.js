@@ -33,7 +33,7 @@ const InputField = ({ label, type, placeholder, required, setValue, row, default
                         onEditorStateChange={onEditorStateChange}
                         toolbarClassName="mx-2"
                         wrapperClassName="form-control px-0"
-                        editorClassName="editorClassName"
+                        editorClassName="mx-2"
                     />
                 ) : type === "textarea" ? (
                     <Form.Control as="textarea" rows={row} placeholder={placeholder} required={required} defaultValue={defaultValue} {...props} />

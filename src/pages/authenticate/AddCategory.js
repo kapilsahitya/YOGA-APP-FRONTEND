@@ -18,14 +18,14 @@ const AddCategory = () => {
     const submitData = async (values) => {
         let { data, error, status } = await postAPIData('/addCategory', values, token);
 
-        if(!error){
-            if(status === 201){
-                navigate('/category');
+        if (!error) {
+            if (status === 201) {
+                navigate('/admin/category');
             }
-        }else{
+        } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
     }
@@ -44,19 +44,19 @@ const AddCategory = () => {
                     />
 
                     <InputField
+                        label="Category Image"
+                        type="file"
+                        required={true}
+                        {...register('image')}
+                    />
+
+                    <InputField
                         label="Description"
                         type="textarea"
                         row="3"
                         placeholder="Description"
                         required={true}
                         {...register('description')}
-                    />
-
-                    <InputField
-                        label="Category Image"
-                        type="file"
-                        required={true}
-                        {...register('image')}
                     />
 
                     <Button variant="primary" type="submit" className="mt-4">

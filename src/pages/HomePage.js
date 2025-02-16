@@ -124,7 +124,7 @@ export default () => {
 
   return (
     <Routes>
-      <Route path={RoutesData.Presentation.path} element={<RouteWithLoader component={Presentation} isAuth={isAuth} />} />
+      {/* <Route path={RoutesData.Presentation.path} element={<RouteWithLoader component={Presentation} isAuth={isAuth} />} /> */}
       <Route path={RoutesData.Signin.path} element={<RouteWithLoader component={Signin} isAuth={isAuth} />} />
       <Route path={RoutesData.Signup.path} element={<RouteWithLoader component={Signup} isAuth={isAuth} />} />
       <Route path={RoutesData.ForgotPassword.path} element={<RouteWithLoader component={ForgotPassword} isAuth={isAuth} />} />

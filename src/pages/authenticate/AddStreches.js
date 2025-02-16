@@ -16,16 +16,18 @@ const AddStretches = () => {
     let token = localStorage.getItem('token');
 
     const submitData = async (values) => {
-        // let { data, error, status } = await postAPIData('/addexercise', values, token);
+        let { data, error, status } = await postAPIData('/addStretches', values, token);
 
-        // if(!error){
-        //     console.log(data);
-        // }else{
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         navigate('/sign-in');
-        //     }
-        // }
+        if (!error) {
+            if (status === 201) {
+                navigate('/admin/stretches');
+            }
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
     }
 
     return (
@@ -38,7 +40,7 @@ const AddStretches = () => {
                         type="text"
                         placeholder="Stretches"
                         required={true}
-                        {...register('stretches')}
+                        {...register('stretchesName')}
                     />
 
                     <InputField

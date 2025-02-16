@@ -99,7 +99,7 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Volt React" link={RoutesData.Presentation.path} image={ReactHero} />
+              {/* <NavItem title="Volt React" link={RoutesData.Presentation.path} image={ReactHero} /> */}
 
               <NavItem title="Exercise" link={RoutesData.Exercise.path} icon={faChartPie} />
               <NavItem title="Challenges" link={RoutesData.Challenges.path} icon={faChartPie} />

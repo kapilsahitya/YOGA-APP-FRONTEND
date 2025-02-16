@@ -53,7 +53,7 @@ const Exercise = () => {
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
     }
@@ -70,7 +70,7 @@ const Exercise = () => {
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
         setShowModal(false);
@@ -84,7 +84,7 @@ const Exercise = () => {
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
-                navigate('/sign-in');
+                navigate('/');
             }
         }
         setDeleteUser({ Id: 0, IsConfirmed: false })
@@ -92,7 +92,7 @@ const Exercise = () => {
 
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={() => navigate('/exercise/add')}>
+            <Button variant="primary" className="my-2" onClick={() => navigate('/admin/exercise/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Exercise
             </Button>
             {exerciseData.length > 0 && <PageTrafficTable data={exerciseData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} />}
