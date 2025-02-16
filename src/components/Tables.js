@@ -146,7 +146,7 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => 
   return (
     <Card border="light" className="shadow-sm mb-4">
       <Card.Body className="pb-0">
-        <Table responsive className="mb-0">
+        <Table responsive className="table-centered table-nowrap rounded mb-0">
           <thead className="thead-light">
             <tr>
               {data.length > 0 && Object.keys(data[0]).map((key, index) => (

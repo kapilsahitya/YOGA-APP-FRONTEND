@@ -37,8 +37,8 @@ const Exercise = () => {
 
         if (!error) {
             setExerciseData([]);
-            if (data.exericises.length > 0) {
-                data.exericises.map((item) => {
+            if (data.exercises.length > 0) {
+                data.exercises.map((item) => {
                     setExerciseData((prev) => [...prev, {
                         Id: item._id,
                         Image: item.image,

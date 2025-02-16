@@ -10,25 +10,58 @@ const AddExercise = () => {
         register,
         handleSubmit,
         setValue,
+        getValues,
         formState: { errors }
     } = useForm();
     const navigate = useNavigate();
 
     let token = localStorage.getItem('token');
 
-    const submitData = async (values) => {
-        let { data, error, status } = await postAPIData('/addexercise', values, token);
+    const submitData = async (values, event) => {
+        event.preventDefault();
+        let image = getValues('image');
+        // console.log(image[0]);
 
-        if (!error) {
-            if (status === 201) {
-                navigate('/admin/exercise');
+        const formData = new FormData();
+        formData.append('exerciseName', 'Mitul');
+        formData.append('description', 'Testing');
+        formData.append('exerciseTime', 40);
+        formData.append('image', image[0])
+
+        console.log(formData);
+
+        try {
+            const res = await fetch(
+                `http://localhost:3000/admin/addExercise`, {
+                method: "POST",
+                body: formData,
+                headers:{
+                    "Authorization": `Bearer ${token}`,
+                }
             }
-        } else {
-            if (status === 401) {
-                localStorage.removeItem('token');
-                navigate('/');
-            }
+            )
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+
         }
+
+        // let { data, error, status } = await postAPIData('/addexercise', formData, token);
+
+        // console.log(data, error, status);
+
+
+        // if (!error) {
+        //     if (status === 201) {
+        //         navigate('/admin/exercise');
+        //     }
+        // } else {
+        //     if (status === 401) {
+        //         localStorage.removeItem('token');
+        //         navigate('/');
+        //     }
+        // }
     }
 
     return (
