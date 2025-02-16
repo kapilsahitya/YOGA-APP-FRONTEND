@@ -31,7 +31,7 @@ export const postAPIData = async (url, data, token) =>{
         } : {
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify(data)
+        body: data ? JSON.stringify(data) : null
     });
     let result = await JsonResult.json();
     if (JsonResult.ok && (JsonResult.status === 200 || JsonResult.status === 201)) {

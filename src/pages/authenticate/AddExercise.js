@@ -20,7 +20,9 @@ const AddExercise = () => {
         let { data, error, status } = await postAPIData('/addexercise', values, token);
 
         if(!error){
-            console.log(data);
+            if(status === 201){
+                navigate('/exercise');
+            }
         }else{
             if (status === 401) {
                 localStorage.removeItem('token');
@@ -61,6 +63,7 @@ const AddExercise = () => {
                         label="Exercise Time (in minutes)"
                         type="number"
                         placeholder="0"
+                        min={0}
                         required={true}
                         {...register('exerciseTime')}
                     />

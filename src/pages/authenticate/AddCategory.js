@@ -16,16 +16,18 @@ const AddCategory = () => {
     let token = localStorage.getItem('token');
 
     const submitData = async (values) => {
-        // let { data, error, status } = await postAPIData('/addexercise', values, token);
+        let { data, error, status } = await postAPIData('/addCategory', values, token);
 
-        // if(!error){
-        //     console.log(data);
-        // }else{
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         navigate('/sign-in');
-        //     }
-        // }
+        if(!error){
+            if(status === 201){
+                navigate('/category');
+            }
+        }else{
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/sign-in');
+            }
+        }
     }
 
     return (
@@ -38,7 +40,7 @@ const AddCategory = () => {
                         type="text"
                         placeholder="Categoty"
                         required={true}
-                        {...register('category')}
+                        {...register('categoryName')}
                     />
 
                     <InputField

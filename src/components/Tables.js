@@ -72,17 +72,17 @@ export const PageVisitsTable = () => {
   );
 };
 
-export const ToggleSwitch = ({activity}) => {
+export const ToggleSwitch = ({ activity }) => {
   const [switchChecked, setSwitchChecked] = useState(activity == 1 ? true : false);
 
-  return(
-    <Form.Check type="switch" checked={switchChecked} onChange={()=>setSwitchChecked(!switchChecked)}/>
+  return (
+    <Form.Check type="switch" checked={switchChecked} onChange={() => setSwitchChecked(!switchChecked)} />
   )
 }
 
-export const PageTrafficTable = ({ data }) => {
-  const TableRow = (props) => {
-    // const { id, source, sourceIcon, sourceIconColor, sourceType, category, rank, trafficShare, change } = props;
+export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => {
+  const TableRow = ({ id, ...props }) => {
+    // const { id, source, sourceIcon, sourceIconColor, sourceType, category, rank, trafficShare, change } = props;console.log(data);
 
     return (
       <tr>
@@ -92,15 +92,27 @@ export const PageTrafficTable = ({ data }) => {
               {value[0] === "Image" ? (
                 <Image src="https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg" style={{ height: 50, width: 50 }} />
               ) : (value[0] === "Pro" || value[0] === "Active") ? (
-                <ToggleSwitch activity={value[1]}/>
+                <ToggleSwitch activity={value[1]} />
               ) : value[0] === "Action" ? (
                 <React.Fragment>
-                  <Button variant="outline-secondary" className="mx-1"><FontAwesomeIcon icon={faEdit} /> Edit</Button>
-                  <Button variant="outline-danger" className="mx-1"><FontAwesomeIcon icon={faTrashAlt} /> Delete</Button>
+                  <Button variant="outline-secondary" className="mx-1" onClick={() => {
+                    handleModal(true);
+                    setUser(data[id]);
+                  }}>
+                    <FontAwesomeIcon icon={faEdit} /> Edit
+                  </Button>
+                  <Button variant="outline-danger" className="mx-1" onClick={() => {
+                    deleteUser({
+                      Id: data[id].Id,
+                      IsConfirmed: true
+                    })
+                  }}>
+                    <FontAwesomeIcon icon={faTrashAlt} /> Delete
+                  </Button>
                 </React.Fragment>
               ) : value[1]?.type === "Button" ? (
                 <Button variant="outline-primary" className="mx-1">{value[1].label}</Button>
-              ) : value[1]}
+              ) : value[0] === "Id" ? id + 1 : <div dangerouslySetInnerHTML={{ __html: value[1] }} />}
             </td>
           )
         })}
@@ -138,12 +150,12 @@ export const PageTrafficTable = ({ data }) => {
           <thead className="thead-light">
             <tr>
               {data.length > 0 && Object.keys(data[0]).map((key, index) => (
-                <th className="border-0" key={index}>{key === 'Id' ? '#' : key.replace("_"," ")}</th>
+                <th className="border-0" key={index}>{key === 'Id' ? '#' : key.replace("_", " ")}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {data.map(value => (<TableRow key={`page-traffic-${value.Id}`} {...value} />))}
+            {data.map((value, index) => (<TableRow key={`page-traffic-${index}`} id={index} {...value} />))}
           </tbody>
         </Table>
       </Card.Body>
