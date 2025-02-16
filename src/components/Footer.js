@@ -60,7 +60,7 @@ export default (props) => {
           </Card.Body>
         </Card>
       )}
-      <footer className="footer section py-5">
+      {/* <footer className="footer section py-5">
         <Row>
           <Col xs={12} lg={6} className="mb-4 mb-lg-0">
             <p className="mb-0 text-center text-xl-left">
@@ -95,7 +95,7 @@ export default (props) => {
             </ul>
           </Col>
         </Row>
-      </footer>
+      </footer> */}
     </div> 
   );
 };

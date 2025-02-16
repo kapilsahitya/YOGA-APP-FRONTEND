@@ -60,8 +60,9 @@ import AddCategory from './authenticate/AddCategory';
 import AddDiscover from './authenticate/AddDiscover';
 import AddWorkout from './authenticate/AddWorkout';
 import AddStretches from './authenticate/AddStreches';
+import Users from './Users';
 
-const RouteWithLoader = ({ component: Component, isAuth,...rest }) => {
+const RouteWithLoader = ({ component: Component, isAuth, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -72,10 +73,10 @@ const RouteWithLoader = ({ component: Component, isAuth,...rest }) => {
   return (
     <React.Fragment>
       {/* {isAuth ? ( */}
-        <React.Fragment>
-          <Preloader show={loaded ? false : true} /> 
-            <Component {...rest} />
-        </React.Fragment>
+      <React.Fragment>
+        <Preloader show={loaded ? false : true} />
+        <Component {...rest} />
+      </React.Fragment>
       {/* // ) : "dkdkd"} */}
     </React.Fragment>
   );
@@ -103,15 +104,15 @@ const RouteWithSidebar = ({ component: Component, isAuth, ...rest }) => {
   return (
     <React.Fragment>
       {/* {isAuth ? ( */}
-        <React.Fragment>
-          <Preloader show={loaded ? false : true} />
-          <Sidebar/>
-          <main className="content">
-            <Navbar/>
-            <Component {...rest} />
-            <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
-          </main>
-        </React.Fragment>
+      <React.Fragment>
+        <Preloader show={loaded ? false : true} />
+        <Sidebar />
+        <main className="content">
+          <Navbar />
+          <Component {...rest} />
+          {/* <Footer toggleSettings={toggleSettings} showSettings={showSettings} /> */}
+        </main>
+      </React.Fragment>
       {/* ) : <Navigate to={'/sign-in'}/>}  */}
     </React.Fragment>
   );
@@ -120,60 +121,61 @@ const RouteWithSidebar = ({ component: Component, isAuth, ...rest }) => {
 export default () => {
   const token = localStorage.getItem('token');
   let isAuth = token ? true : false;
-  
-  return(
+
+  return (
     <Routes>
-      <Route path={RoutesData.Presentation.path} element={<RouteWithLoader component={Presentation} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Signin.path} element={<RouteWithLoader component={Signin} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Signup.path} element={<RouteWithLoader component={Signup} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.ForgotPassword.path} element={<RouteWithLoader component={ForgotPassword} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.ResetPassword.path} element={<RouteWithLoader component={ResetPassword} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Lock.path} element={<RouteWithLoader component={Lock} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.NotFound.path} element={<RouteWithLoader component={NotFoundPage} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.ServerError.path} element={<RouteWithLoader component={ServerError} isAuth={isAuth}/>}/>  
+      <Route path={RoutesData.Presentation.path} element={<RouteWithLoader component={Presentation} isAuth={isAuth} />} />
+      <Route path={RoutesData.Signin.path} element={<RouteWithLoader component={Signin} isAuth={isAuth} />} />
+      <Route path={RoutesData.Signup.path} element={<RouteWithLoader component={Signup} isAuth={isAuth} />} />
+      <Route path={RoutesData.ForgotPassword.path} element={<RouteWithLoader component={ForgotPassword} isAuth={isAuth} />} />
+      <Route path={RoutesData.ResetPassword.path} element={<RouteWithLoader component={ResetPassword} isAuth={isAuth} />} />
+      <Route path={RoutesData.Lock.path} element={<RouteWithLoader component={Lock} isAuth={isAuth} />} />
+      <Route path={RoutesData.NotFound.path} element={<RouteWithLoader component={NotFoundPage} isAuth={isAuth} />} />
+      <Route path={RoutesData.ServerError.path} element={<RouteWithLoader component={ServerError} isAuth={isAuth} />} />
 
-      <Route path={RoutesData.Categories.path} element={<RouteWithSidebar component={Categories}/>}/>
-      <Route path={RoutesData.Exercise.path} element={<RouteWithSidebar component={Exercise}/>}/>
-      <Route path={RoutesData.Challenges.path} element={<RouteWithSidebar component={Challenges}/>}/>
-      <Route path={RoutesData.Discover.path} element={<RouteWithSidebar component={Discover}/>}/>
-      <Route path={RoutesData.QuickWorkout.path} element={<RouteWithSidebar component={QuickWorkout}/>}/>
-      <Route path={RoutesData.Stretches.path} element={<RouteWithSidebar component={Stretches}/>}/>
-      <Route path={RoutesData.AddExercise.path} element={<RouteWithSidebar component={AddExercise}/>}/>
-      <Route path={RoutesData.AddChallenge.path} element={<RouteWithSidebar component={AddChallenge}/>}/>
-      <Route path={RoutesData.AddCategory.path} element={<RouteWithSidebar component={AddCategory}/>}/>
-      <Route path={RoutesData.AddDiscover.path} element={<RouteWithSidebar component={AddDiscover}/>}/>
-      <Route path={RoutesData.AddQuickWorkout.path} element={<RouteWithSidebar component={AddWorkout}/>}/>
-      <Route path={RoutesData.AddStretches.path} element={<RouteWithSidebar component={AddStretches}/>}/>
+      <Route path={RoutesData.Categories.path} element={<RouteWithSidebar component={Categories} />} />
+      <Route path={RoutesData.Exercise.path} element={<RouteWithSidebar component={Exercise} />} />
+      <Route path={RoutesData.Challenges.path} element={<RouteWithSidebar component={Challenges} />} />
+      <Route path={RoutesData.Discover.path} element={<RouteWithSidebar component={Discover} />} />
+      <Route path={RoutesData.QuickWorkout.path} element={<RouteWithSidebar component={QuickWorkout} />} />
+      <Route path={RoutesData.Stretches.path} element={<RouteWithSidebar component={Stretches} />} />
+      <Route path={RoutesData.AddExercise.path} element={<RouteWithSidebar component={AddExercise} />} />
+      <Route path={RoutesData.AddChallenge.path} element={<RouteWithSidebar component={AddChallenge} />} />
+      <Route path={RoutesData.AddCategory.path} element={<RouteWithSidebar component={AddCategory} />} />
+      <Route path={RoutesData.AddDiscover.path} element={<RouteWithSidebar component={AddDiscover} />} />
+      <Route path={RoutesData.AddQuickWorkout.path} element={<RouteWithSidebar component={AddWorkout} />} />
+      <Route path={RoutesData.AddStretches.path} element={<RouteWithSidebar component={AddStretches} />} />
 
-      <Route path={RoutesData.DashboardOverview.path} element={<RouteWithSidebar component={DashboardOverview} isAuth={isAuth}/>}/>  
-      <Route path={RoutesData.Upgrade.path} element={<RouteWithSidebar component={Upgrade} isAuth={isAuth}/>}/>  
-      <Route path={RoutesData.Transactions.path} element={<RouteWithSidebar component={Transactions} isAuth={isAuth}/>}/>  
-      <Route path={RoutesData.Settings.path} element={<RouteWithSidebar component={Settings} isAuth={isAuth}/>}/>  
-      <Route path={RoutesData.BootstrapTables.path} element={<RouteWithSidebar component={BootstrapTables} isAuth={isAuth}/>}/>  
+      <Route path={RoutesData.DashboardOverview.path} element={<RouteWithSidebar component={DashboardOverview} isAuth={isAuth} />} />
+      <Route path={RoutesData.Upgrade.path} element={<RouteWithSidebar component={Upgrade} isAuth={isAuth} />} />
+      <Route path={RoutesData.Transactions.path} element={<RouteWithSidebar component={Transactions} isAuth={isAuth} />} />
+      <Route path={RoutesData.Settings.path} element={<RouteWithSidebar component={Settings} isAuth={isAuth} />} />
+      <Route path={RoutesData.Users.path} element={<RouteWithSidebar component={Users} isAuth={isAuth} />} />
+      <Route path={RoutesData.BootstrapTables.path} element={<RouteWithSidebar component={BootstrapTables} isAuth={isAuth} />} />
 
-      <Route path={RoutesData.Accordions.path} element={<RouteWithSidebar component={Accordion} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Alerts.path} element={<RouteWithSidebar component={Alerts} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Badges.path} element={<RouteWithSidebar component={Badges} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Breadcrumbs.path} element={<RouteWithSidebar component={Breadcrumbs} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Buttons.path} element={<RouteWithSidebar component={Buttons} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Forms.path} element={<RouteWithSidebar component={Forms} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Modals.path} element={<RouteWithSidebar component={Modals} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Navs.path} element={<RouteWithSidebar component={Navs} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Navbars.path} element={<RouteWithSidebar component={Navbars} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Pagination.path} element={<RouteWithSidebar component={Pagination} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Popovers.path} element={<RouteWithSidebar component={Popovers} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Progress.path} element={<RouteWithSidebar component={Progress} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Tables.path} element={<RouteWithSidebar component={Tables} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Tabs.path} element={<RouteWithSidebar component={Tabs} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Tooltips.path} element={<RouteWithSidebar component={Tooltips} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.Toasts.path} element={<RouteWithSidebar component={Toasts} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.DocsOverview.path} element={<RouteWithSidebar component={DocsOverview} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.DocsDownload.path} element={<RouteWithSidebar component={DocsDownload} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.DocsQuickStart.path} element={<RouteWithSidebar component={DocsQuickStart} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.DocsLicense.path} element={<RouteWithSidebar component={DocsLicense} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.DocsFolderStructure.path} element={<RouteWithSidebar component={DocsFolderStructure} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.DocsBuild.path} element={<RouteWithSidebar component={DocsBuild} isAuth={isAuth}/>}/>
-      <Route path={RoutesData.DocsChangelog.path} element={<RouteWithSidebar component={DocsChangelog} isAuth={isAuth}/>}/>
+      <Route path={RoutesData.Accordions.path} element={<RouteWithSidebar component={Accordion} isAuth={isAuth} />} />
+      <Route path={RoutesData.Alerts.path} element={<RouteWithSidebar component={Alerts} isAuth={isAuth} />} />
+      <Route path={RoutesData.Badges.path} element={<RouteWithSidebar component={Badges} isAuth={isAuth} />} />
+      <Route path={RoutesData.Breadcrumbs.path} element={<RouteWithSidebar component={Breadcrumbs} isAuth={isAuth} />} />
+      <Route path={RoutesData.Buttons.path} element={<RouteWithSidebar component={Buttons} isAuth={isAuth} />} />
+      <Route path={RoutesData.Forms.path} element={<RouteWithSidebar component={Forms} isAuth={isAuth} />} />
+      <Route path={RoutesData.Modals.path} element={<RouteWithSidebar component={Modals} isAuth={isAuth} />} />
+      <Route path={RoutesData.Navs.path} element={<RouteWithSidebar component={Navs} isAuth={isAuth} />} />
+      <Route path={RoutesData.Navbars.path} element={<RouteWithSidebar component={Navbars} isAuth={isAuth} />} />
+      <Route path={RoutesData.Pagination.path} element={<RouteWithSidebar component={Pagination} isAuth={isAuth} />} />
+      <Route path={RoutesData.Popovers.path} element={<RouteWithSidebar component={Popovers} isAuth={isAuth} />} />
+      <Route path={RoutesData.Progress.path} element={<RouteWithSidebar component={Progress} isAuth={isAuth} />} />
+      <Route path={RoutesData.Tables.path} element={<RouteWithSidebar component={Tables} isAuth={isAuth} />} />
+      <Route path={RoutesData.Tabs.path} element={<RouteWithSidebar component={Tabs} isAuth={isAuth} />} />
+      <Route path={RoutesData.Tooltips.path} element={<RouteWithSidebar component={Tooltips} isAuth={isAuth} />} />
+      <Route path={RoutesData.Toasts.path} element={<RouteWithSidebar component={Toasts} isAuth={isAuth} />} />
+      <Route path={RoutesData.DocsOverview.path} element={<RouteWithSidebar component={DocsOverview} isAuth={isAuth} />} />
+      <Route path={RoutesData.DocsDownload.path} element={<RouteWithSidebar component={DocsDownload} isAuth={isAuth} />} />
+      <Route path={RoutesData.DocsQuickStart.path} element={<RouteWithSidebar component={DocsQuickStart} isAuth={isAuth} />} />
+      <Route path={RoutesData.DocsLicense.path} element={<RouteWithSidebar component={DocsLicense} isAuth={isAuth} />} />
+      <Route path={RoutesData.DocsFolderStructure.path} element={<RouteWithSidebar component={DocsFolderStructure} isAuth={isAuth} />} />
+      <Route path={RoutesData.DocsBuild.path} element={<RouteWithSidebar component={DocsBuild} isAuth={isAuth} />} />
+      <Route path={RoutesData.DocsChangelog.path} element={<RouteWithSidebar component={DocsChangelog} isAuth={isAuth} />} />
       {/* <Navigate to={RoutesData.NotFound.path}/> */}
     </Routes>
   )
