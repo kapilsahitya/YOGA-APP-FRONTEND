@@ -11,27 +11,27 @@ import InputField from "../../utils/InputField";
 const Challenges = () => {
     const [challengesData, setChallengesData] = useState([]);
     const [showModal, setShowModal] = useState(false);
-        const [updateUser, setUpdateUser] = useState({});
-        const [deleteUser, setDeleteUser] = useState({
-            Id: 0,
-            IsConfirmed: false
-        });
+    const [updateUser, setUpdateUser] = useState({});
+    const [deleteUser, setDeleteUser] = useState({
+        Id: 0,
+        IsConfirmed: false
+    });
     const navigate = useNavigate();
     let token = localStorage.getItem('token');
 
     const {
-            register,
-            handleSubmit,
-            setValue
-        } = useForm();
-    
-        const handleClose = () => {
-            setValue('challengesName');
-            setValue('description');
-            setShowModal(false);
-        }
+        register,
+        handleSubmit,
+        setValue
+    } = useForm();
 
-    const fetchData = async()=> {
+    const handleClose = () => {
+        setValue('challengesName');
+        setValue('description');
+        setShowModal(false);
+    }
+
+    const fetchData = async () => {
         let { data, error, status } = await getAPIData('/challenges', token);
 
         if (!error) {
@@ -65,30 +65,29 @@ const Challenges = () => {
     }, []);
 
     const updateData = async (values) => {
-            let { data, error, status } = await postAPIData(`/updateChallenges/${updateUser.Id}`, values, token);
-    
-            if (!error) {
-                fetchData();
-            } else {
-                if (status === 401) {
-                    localStorage.removeItem('token');
-                    navigate('/');
-                }
+        let { data, error, status } = await postAPIData(`/updateChallenges/${updateUser.Id}`, values, token);
+
+        if (!error) {
+            fetchData();
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
             }
-            setShowModal(false);
         }
-    
-        const deleteData = () => {
-    
-        }
-console.log(updateUser);
+        setShowModal(false);
+    }
+
+    const deleteData = () => {
+
+    }
 
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={()=>navigate('/admin/challenges/add')}>
+            <Button variant="primary" className="my-2" onClick={() => navigate('/admin/challenges/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Challenges
             </Button>
-            {challengesData.length > 0 && <PageTrafficTable data={challengesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser}/>}
+            {challengesData.length > 0 && <PageTrafficTable data={challengesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>

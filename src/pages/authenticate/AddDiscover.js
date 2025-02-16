@@ -16,7 +16,17 @@ const AddDiscover = () => {
     let token = localStorage.getItem('token');
 
     const submitData = async (values) => {
-        let { data, error, status } = await postAPIData('/addDiscover', values, token);
+        const formData = new FormData();
+
+        Object.entries(values).map((data)=>{
+            if(data[0] === "image"){                
+                formData.append(`${data[0]}`, data[1][0])
+            }else{
+                formData.append(`${data[0]}`, data[1])
+            }
+        })
+
+        let { data, error, status } = await postAPIData('/addDiscover', formData, token);
 
         if (!error) {
             if (status === 201) {

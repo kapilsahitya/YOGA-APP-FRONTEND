@@ -90,7 +90,7 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => 
           return (
             <td key={index}>
               {value[0] === "Image" ? (
-                <Image src="https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg" style={{ height: 50, width: 50 }} />
+                <Image src={value[1]} style={{ height: 50, width: 50 }} />
               ) : (value[0] === "Pro" || value[0] === "Active") ? (
                 <ToggleSwitch activity={value[1]} />
               ) : value[0] === "Action" ? (

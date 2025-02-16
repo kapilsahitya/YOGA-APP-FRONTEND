@@ -17,51 +17,29 @@ const AddExercise = () => {
 
     let token = localStorage.getItem('token');
 
-    const submitData = async (values, event) => {
-        event.preventDefault();
-        let image = getValues('image');
-        // console.log(image[0]);
-
+    const submitData = async (values) => {
         const formData = new FormData();
-        formData.append('exerciseName', 'Mitul');
-        formData.append('description', 'Testing');
-        formData.append('exerciseTime', 40);
-        formData.append('image', image[0])
 
-        console.log(formData);
-
-        try {
-            const res = await fetch(
-                `http://localhost:3000/admin/addExercise`, {
-                method: "POST",
-                body: formData,
-                headers:{
-                    "Authorization": `Bearer ${token}`,
-                }
+        Object.entries(values).map((data)=>{
+            if(data[0] === "image"){                
+                formData.append(`${data[0]}`, data[1][0])
+            }else{
+                formData.append(`${data[0]}`, data[1])
             }
-            )
-            console.log(res);
+        })
 
-        } catch (error) {
-            console.log(error);
+        let { data, error, status } = await postAPIData('/addexercise', formData, token);
 
+        if (!error) {
+            if (status === 201) {
+                navigate('/admin/exercise');
+            }
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
         }
-
-        // let { data, error, status } = await postAPIData('/addexercise', formData, token);
-
-        // console.log(data, error, status);
-
-
-        // if (!error) {
-        //     if (status === 201) {
-        //         navigate('/admin/exercise');
-        //     }
-        // } else {
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         navigate('/');
-        //     }
-        // }
     }
 
     return (

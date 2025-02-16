@@ -16,7 +16,17 @@ const AddWorkout = () => {
     let token = localStorage.getItem('token');
 
     const submitData = async (values) => {
-        let { data, error, status } = await postAPIData('/addQuickworkout', values, token);
+        const formData = new FormData();
+
+        Object.entries(values).map((data)=>{
+            if(data[0] === "image"){                
+                formData.append(`${data[0]}`, data[1][0])
+            }else{
+                formData.append(`${data[0]}`, data[1])
+            }
+        })
+
+        let { data, error, status } = await postAPIData('/addQuickworkout', formData, token);
 
         if (!error) {
             if (status === 201) {
