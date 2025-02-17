@@ -8,7 +8,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
 
-const Challenges = () => {
+const CategoryExercise = () => {
     const [challengesData, setChallengesData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [updateUser, setUpdateUser] = useState({});
@@ -46,11 +46,7 @@ const Challenges = () => {
                         Description: item.description,
                         Add_Week: {
                             label: "View Week",
-                            type: "Button",
-                            navigateRoute:"/admin/weeks",
-                            queryparams: {
-                                challengesid : item._id,
-                            },
+                            type: "Button"
                         },
                         Pro: item.isActive,
                         Action: 1
@@ -148,4 +144,4 @@ const Challenges = () => {
         </React.Fragment>
     )
 };
-export default Challenges;
+export default CategoryExercise;

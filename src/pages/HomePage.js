@@ -52,6 +52,13 @@ import Categories from './authenticate/Categories';
 import Exercise from './authenticate/Exercise';
 import AddExercise from './authenticate/AddExercise';
 import Challenges from './authenticate/Challenges';
+import Weeks from "./authenticate/Weeks";
+import AddWeek from './authenticate/AddWeek';
+import WeekDays from "./authenticate/WeekDays";
+import AddWeekDays from './authenticate/AddWeekDays';
+import ChallengesExercise from  "./authenticate/ChallengesExercise";
+import AddChallengesExercise from "./authenticate/AddChallengesExercise";
+import CategoryExercise from "./authenticate/CategoryExercise";
 import Discover from './authenticate/Discover';
 import QuickWorkout from './authenticate/QuickWorkout';
 import Stretches from './authenticate/Stretches';
@@ -136,6 +143,12 @@ export default () => {
       <Route path={RoutesData.Categories.path} element={<RouteWithSidebar component={Categories} />} />
       <Route path={RoutesData.Exercise.path} element={<RouteWithSidebar component={Exercise} />} />
       <Route path={RoutesData.Challenges.path} element={<RouteWithSidebar component={Challenges} />} />
+      <Route path={RoutesData.Weeks.path} element={<RouteWithSidebar component={Weeks} />} />
+      <Route path={RoutesData.AddWeek.path} element={<RouteWithSidebar component={AddWeek} />} />
+      <Route path={RoutesData.WeekDays.path} element={<RouteWithSidebar component={WeekDays} />} />
+      <Route path={RoutesData.AddWeekDays.path} element={<RouteWithSidebar component={AddWeekDays} />} />
+      <Route path={RoutesData.ChallengesExercise.path} element={<RouteWithSidebar component={ChallengesExercise} />} />
+      <Route path={RoutesData.AddChallengesExercise.path} element={<RouteWithSidebar component={AddChallengesExercise} />} />
       <Route path={RoutesData.Discover.path} element={<RouteWithSidebar component={Discover} />} />
       <Route path={RoutesData.QuickWorkout.path} element={<RouteWithSidebar component={QuickWorkout} />} />
       <Route path={RoutesData.Stretches.path} element={<RouteWithSidebar component={Stretches} />} />

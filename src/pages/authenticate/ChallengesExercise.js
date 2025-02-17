@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 import { PageTrafficTable } from "../../components/Tables";
 import { getAPIData, postAPIData } from "../../utils/getAPIData";
 import { Button, Form, Modal } from "react-bootstrap";
@@ -8,14 +8,20 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
 
-const Challenges = () => {
-    const [challengesData, setChallengesData] = useState([]);
+const ChallengesExercise = () => {
+
+    const [searchParams] = useSearchParams();
+    const daysid = searchParams.get('daysid');
+    const week_id = searchParams.get('weekid');
+    const challenges_id = searchParams.get('challengesid');
+    const [challengesExerciseData, setchallengesExerciseData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [updateUser, setUpdateUser] = useState({});
     const [deleteUser, setDeleteUser] = useState({
         Id: 0,
         IsConfirmed: false
     });
+    const [errormsg, setErrormsg] = useState("")
     
     const navigate = useNavigate();
     let token = localStorage.getItem('token');
@@ -33,25 +39,18 @@ const Challenges = () => {
     }
 
     const fetchData = async () => {
-        let { data, error, status } = await getAPIData('/challenges', token);
+        let { data, error, status } = await getAPIData(`/getExerciseByDaysId/${daysid}`, token);
 
         if (!error) {
-            setChallengesData([]);
-            if (data.challenges.length > 0) {
-                data.challenges.map((item) => {
-                    setChallengesData((prev) => [...prev, {
+            setchallengesExerciseData([]);
+            if (data.challengesexercises.length > 0) {
+                data.challengesexercises.map((item) => {
+                    setchallengesExerciseData((prev) => [...prev, {
                         Id: item._id,
                         Image: item.image,
-                        Challenges_Name: item.challengesName,
+                        Exercise_Name: item.challengesName,
                         Description: item.description,
-                        Add_Week: {
-                            label: "View Week",
-                            type: "Button",
-                            navigateRoute:"/admin/weeks",
-                            queryparams: {
-                                challengesid : item._id,
-                            },
-                        },
+                        Exercise_Time: item.exerciseTime,
                         Pro: item.isActive,
                         Action: 1
                     }])
@@ -61,6 +60,14 @@ const Challenges = () => {
             if (status === 401) {
                 localStorage.removeItem('token');
                 navigate('/');
+            }
+            else {
+                if (data.message) {
+                    setErrormsg(data.message);
+                }
+                else {
+                    setErrormsg("Something Went Wrong!")
+                }
             }
         }
     }
@@ -87,12 +94,26 @@ const Challenges = () => {
 
     }
 
+
+    const queryParams = new URLSearchParams({
+        daysid : daysid,
+        weekid: week_id,
+        challengesid: challenges_id
+
+    }).toString();
+
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={() => navigate('/admin/challenges/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Challenges
+            <Button variant="primary" className="my-2" onClick={() => navigate(`/admin/addchallengesexercise?${queryParams}`)}>
+                <FontAwesomeIcon icon={faPlus} /> Add New Challenges Exercise
             </Button>
-            {challengesData.length > 0 && <PageTrafficTable data={challengesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser}/>}
+            {challengesExerciseData.length > 0 ? <PageTrafficTable 
+                                                    data={challengesExerciseData} 
+                                                    handleModal={setShowModal} 
+                                                    setUser={setUpdateUser} 
+                                                    deleteUser={setDeleteUser}
+                                                />
+                                            : <h1>{errormsg}</h1>}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
@@ -148,4 +169,4 @@ const Challenges = () => {
         </React.Fragment>
     )
 };
-export default Challenges;
+export default ChallengesExercise;

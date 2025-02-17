@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faEdit, faEllipsisH, faExternalLinkAlt, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagination, ButtonGroup, Form } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { RoutesData } from "../routes";
 import { pageVisits, pageTraffic, pageRanking } from "../data/tables";
@@ -82,6 +82,24 @@ export const ToggleSwitch = ({ activity }) => {
 
 export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => {
   const TableRow = ({ id, ...props }) => {
+
+    const navigate = useNavigate();
+
+    const handleClick = (navigateroute, id) => {
+      const queryParams = new URLSearchParams({
+        challengesid: id,
+
+      }).toString();
+      // Redirect to the desired path
+      navigate(`${navigateroute}?${queryParams}`);
+    };
+
+    const handleDaysClick = (navigateroute, id, parentparams) => {
+      console.log("parentparams", parentparams)
+      const queryParams = new URLSearchParams(parentparams).toString();
+
+      navigate(`${navigateroute}?${queryParams}`);
+    }
     // const { id, source, sourceIcon, sourceIconColor, sourceType, category, rank, trafficShare, change } = props;console.log(data);
 
     return (
@@ -111,7 +129,15 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => 
                   </Button>
                 </React.Fragment>
               ) : value[1]?.type === "Button" ? (
-                <Button variant="outline-primary" className="mx-1">{value[1].label}</Button>
+                <Button variant="outline-primary" className="mx-1" onClick={() => {
+                  // if (value[1].label === "View Days") {
+                    console.log("value[1]", value[1])
+                    handleDaysClick(value[1].navigateRoute, data[id].Id, value[1].queryparams)
+                  // }
+                  // else {
+                  //   handleClick(value[1].navigateRoute, data[id].Id)
+                  // }
+                }}>{value[1].label}</Button>
               ) : value[0] === "Id" ? id + 1 : <div dangerouslySetInnerHTML={{ __html: value[1] }} />}
             </td>
           )

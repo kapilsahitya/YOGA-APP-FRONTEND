@@ -19,6 +19,13 @@ export const RoutesData = {
 
     Exercise: { path: "/admin/exercise"},
     Challenges: { path: "/admin/challenges"},
+    Weeks:{path:"/admin/Weeks"},
+    AddWeek:{path:"/admin/addweek"},
+    WeekDays : {path:"/admin/weekdays"},
+    AddWeekDays:{path:"/admin/addweekdays"},
+    ChallengesExercise : {path:"/admin/challengesexercise"},
+    AddChallengesExercise : {path:'/admin/addchallengesexercise'},
+    CategoryExercise : {path:'/admin/categoryexercise'},
     Categories: { path: "/admin/category"},
     Discover: { path: "/admin/discover"},
     QuickWorkout: { path: "/admin/workout"},
