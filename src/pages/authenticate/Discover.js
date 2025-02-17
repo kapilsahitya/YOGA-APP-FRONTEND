@@ -82,12 +82,28 @@ const Discover = () => {
 
     }
 
+    const statusChange = async (Id, Status) => {
+        let { data, error, status } = await postAPIData(`/changeDiscoverStatus`, {
+            id: Id,
+            status: Status ? 1 : 0
+        }, token);
+
+        if (!error) {
+            fetchData();
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
+    }
+
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/discover/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Discover
             </Button>
-            {discoverData.length > 0 && <PageTrafficTable data={discoverData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} />}
+            {discoverData.length > 0 && <PageTrafficTable data={discoverData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange} />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>

@@ -82,12 +82,28 @@ const QuickWorkout = () => {
 
     }
 
+    const statusChange = async (Id, Status) => {
+        let { data, error, status } = await postAPIData(`/changeQuickworkoutStatus`, {
+            id: Id,
+            status: Status ? 1 : 0
+        }, token);
+
+        if (!error) {
+            fetchData();
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
+    }
+
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/workout/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Quick Workout
             </Button>
-            {workoutData.length > 0 && <PageTrafficTable data={workoutData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} />}
+            {workoutData.length > 0 && <PageTrafficTable data={workoutData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange} />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
