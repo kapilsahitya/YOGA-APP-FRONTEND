@@ -82,12 +82,28 @@ const Stretches = () => {
 
     }
 
+    const statusChange = async (Id, Status) => {
+        let { data, error, status } = await postAPIData(`/changeStretchesStatus`, {
+            id: Id,
+            status: Status ? 1 : 0
+        }, token);
+
+        if (!error) {
+            fetchData();
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
+    }
+        
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/stretches/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Stretches
             </Button>
-            {stretchesData.length > 0 && <PageTrafficTable data={stretchesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} />}
+            {stretchesData.length > 0 && <PageTrafficTable data={stretchesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange} />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faEdit, faEllipsisH, faExternalLinkAlt, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagination, ButtonGroup, Form } from "react-bootstrap";
@@ -72,15 +72,52 @@ export const PageVisitsTable = () => {
   );
 };
 
-export const ToggleSwitch = ({ activity }) => {
+export const ToggleSwitch = ({ activity, id, updateStatus }) => {
   const [switchChecked, setSwitchChecked] = useState(activity == 1 ? true : false);
 
   return (
-    <Form.Check type="switch" checked={switchChecked} onChange={() => setSwitchChecked(!switchChecked)} />
+    <Form.Check type="switch" checked={switchChecked} onChange={() => {
+      setSwitchChecked(!switchChecked);
+      updateStatus(id, !switchChecked);
+    }} />
   )
 }
 
-export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => {
+export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser, statusChange }) => {
+  const [activePage, setActivePage] = useState(1);
+  const [activeEllipsis, setActiveEllipsis] = useState(false);
+  const totalPages = Math.ceil(data.length / 10);
+
+  const startIndex = (activePage - 1) * 10;
+  const endIndex = startIndex + 10;
+  const currentItems = data.slice(startIndex, endIndex);
+
+  const goToPage = (index) => {
+    setActivePage(index);
+  }
+
+  const nextPage = () => {
+    if (activePage === 4) {
+      setActiveEllipsis(true);
+    } else if (activePage === totalPages - 4) {
+      setActiveEllipsis(false);
+    }
+    if (activePage < totalPages) {
+      setActivePage(activePage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (activePage === 5) {
+      setActiveEllipsis(false);
+    } else if (activePage - 1 === totalPages - 4) {
+      setActiveEllipsis(true);
+    }
+    if (activePage > 1) {
+      setActivePage(activePage - 1);
+    }
+  };
+
   const TableRow = ({ id, ...props }) => {
 
     const navigate = useNavigate();
@@ -110,7 +147,7 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => 
               {value[0] === "Image" ? (
                 <Image src={value[1]} style={{ height: 50, width: 50 }} />
               ) : (value[0] === "Pro" || value[0] === "Active") ? (
-                <ToggleSwitch activity={value[1]} />
+                <ToggleSwitch activity={value[1]} id={props.Id} updateStatus={statusChange} />
               ) : value[0] === "Action" ? (
                 <React.Fragment>
                   <Button variant="outline-secondary" className="mx-1" onClick={() => {
@@ -138,7 +175,7 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => 
                   //   handleClick(value[1].navigateRoute, data[id].Id)
                   // }
                 }}>{value[1].label}</Button>
-              ) : value[0] === "Id" ? id + 1 : <div dangerouslySetInnerHTML={{ __html: value[1] }} />}
+              ) : value[0] === "Id" ? id + 1+ ((activePage - 1) * 10) : <div dangerouslySetInnerHTML={{ __html: value[1] }} />}
             </td>
           )
         })}
@@ -170,22 +207,47 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser }) => 
   };
 
   return (
-    <Card border="light" className="shadow-sm mb-4">
-      <Card.Body className="pb-0">
-        <Table responsive className="table-centered table-nowrap rounded mb-0">
-          <thead className="thead-light">
-            <tr>
-              {data.length > 0 && Object.keys(data[0]).map((key, index) => (
-                <th className="border-0" key={index}>{key === 'Id' ? '#' : key.replace("_", " ")}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((value, index) => (<TableRow key={`page-traffic-${index}`} id={index} {...value} />))}
-          </tbody>
-        </Table>
-      </Card.Body>
-    </Card>
+    <React.Fragment>
+      <Card border="light" className="shadow-sm mb-4">
+        <Card.Body className="pb-0">
+          <Table responsive className="table-centered table-nowrap rounded mb-0">
+            <thead className="thead-light">
+              <tr>
+                {currentItems.length > 0 && Object.keys(currentItems[0]).map((key, index) => (
+                  <th className="border-0" key={index}>{key === 'Id' ? '#' : key.replace("_", " ")}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.map((value, index) => (<TableRow key={`page-traffic-${index}`} id={index} {...value} />))}
+            </tbody>
+          </Table>
+        </Card.Body>
+      </Card>
+      {totalPages > 1 &&
+        <Pagination className="justify-content-end">
+          <Pagination.Prev onClick={() => prevPage()} disabled={activePage === 1} linkClassName="prevBtn" />
+          {totalPages > 5 ? (
+            <React.Fragment>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <Pagination.Item key={index} onClick={() => goToPage(index + 1)} active={activePage === index + 1}>{index + 1}</Pagination.Item>
+              )).slice(0, 4)}
+
+              <Pagination.Ellipsis active={activeEllipsis} />
+
+              {Array.from({ length: totalPages }, (_, index) => (
+                <Pagination.Item key={index} onClick={() => goToPage(index + 1)} active={activePage === index + 1}>{index + 1}</Pagination.Item>
+              )).slice(totalPages - 4)}
+            </React.Fragment>
+          ) : (
+            Array.from({ length: totalPages }, (_, index) => (
+              <Pagination.Item key={index} onClick={() => goToPage(index + 1)} active={activePage === index + 1}>{index + 1}</Pagination.Item>
+            )
+            ))}
+          <Pagination.Next onClick={() => nextPage()} disabled={activePage === totalPages} linkClassName="nextBtn" />
+        </Pagination>
+      }
+    </React.Fragment>
   );
 };
 

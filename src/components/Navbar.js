@@ -5,13 +5,16 @@ import { faBell, faCog, faEnvelopeOpen, faSearch, faSignOutAlt, faUserShield } f
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import NOTIFICATIONS_DATA from "../data/notifications";
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
-import { Row, Col, Nav, Form, Image, Navbar, Dropdown, Container, ListGroup, InputGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Row, Col, Nav, Form, Image, Navbar, Dropdown, Container, ListGroup, InputGroup, Breadcrumb } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export default (props) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const areNotificationsRead = notifications.reduce((acc, notif) => acc && notif.read, true);
+  const location = useLocation();
+  const Breadcrumbs = location.pathname.split('/')[location.pathname.split('/').length - 1];
+  
   const navigate = useNavigate();
 
   const markNotificationsAsRead = () => {
@@ -56,6 +59,9 @@ export default (props) => {
       <Container fluid className="px-0">
         <div className="d-flex justify-content-between w-100">
           <div className="d-flex align-items-center">
+            <Breadcrumb>
+              <Breadcrumb.Item active style={{fontSize:28, color: "black"}}>{Breadcrumbs.charAt(0).toUpperCase() + Breadcrumbs.slice(1)}</Breadcrumb.Item>
+            </Breadcrumb>
             {/* <Form className="navbar-search">
               <Form.Group id="topbarSearch">
                 <InputGroup className="input-group-merge search-bar">

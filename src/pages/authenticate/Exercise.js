@@ -90,12 +90,28 @@ const Exercise = () => {
         setDeleteUser({ Id: 0, IsConfirmed: false })
     }
 
+    const statusChange = async (Id,Status) => {
+        let {data, error, status} = await postAPIData(`/changeExerciseStatus`,{
+            id: Id,
+            status: Status ? 1 : 0
+        }, token);
+
+        if(!error){
+            fetchData();
+        }else{
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
+    }
+
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/exercise/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Exercise
             </Button>
-            {exerciseData.length > 0 && <PageTrafficTable data={exerciseData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} />}
+            {exerciseData.length > 0 && <PageTrafficTable data={exerciseData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange}/>}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
