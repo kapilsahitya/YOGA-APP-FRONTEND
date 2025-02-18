@@ -34,7 +34,7 @@ const WeekDays = () => {
                             label: "View Exercise",
                             type: "Button",
                             queryparams: {
-                                daysid:  item._id,
+                                daysid: item._id,
                                 challengesid: challenges_id,
                                 weekid: id
                             },
@@ -73,10 +73,17 @@ const WeekDays = () => {
 
     }).toString();
 
+    const handleAddWeekDay = () => {
+        if (weekDaysData.length >= 7) {
+            alert("Days can not be more than 7 in a week")
+        } else {
+            navigate(`/admin/addweekdays?${queryParams}`)
+        }
+    }
 
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={() => navigate(`/admin/addweekdays?${queryParams}`)}>
+            <Button variant="primary" className="my-2" onClick={() => { handleAddWeekDay() }}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Week Days
             </Button>
 
