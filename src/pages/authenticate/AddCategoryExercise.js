@@ -80,7 +80,7 @@ const AddCategoryExercise = () => {
     return (
         <Card border="light" className="bg-white shadow-sm mb-4">
             <Card.Body>
-                <h5 className="mb-4">Add Challenges Exercise</h5>
+                <h5 className="mb-4">Add Category Exercise</h5>
                 <Form onSubmit={handleSubmit(submitData)}>
                     <InputField
                         label="Select exercise"
@@ -90,7 +90,7 @@ const AddCategoryExercise = () => {
                     />
 
                     <Button variant="primary" type="submit" className="mt-4">
-                        Add Challenges Exercise
+                        Add Category Exercise
                     </Button>
                 </Form>
             </Card.Body>
