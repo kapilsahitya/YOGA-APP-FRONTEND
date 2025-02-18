@@ -4,7 +4,7 @@ import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBoxOpen, faChartPie, faCog, faFileAlt, faHandHoldingUsd, faSignOutAlt, faTable, faTimes, faCalendarAlt, faMapPin, faInbox, faRocket } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faList, faDumbbell, faChartPie, faCog, faChildReaching, faPersonWalking, faCompass, faUsers, faTimes, faPersonPraying, faMapPin, faInbox, faRocket } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
@@ -99,20 +99,20 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Dashboard" link={RoutesData.DashboardOverview.path} icon={faChartPie}/>
+              <NavItem title="Dashboard" link={RoutesData.DashboardOverview.path} icon={faHouse}/>
 
-              <NavItem title="Exercise" link={RoutesData.Exercise.path} icon={faChartPie} />
-              <NavItem title="Challenges" link={RoutesData.Challenges.path} icon={faChartPie} />
-              <NavItem title="Category" link={RoutesData.Categories.path} icon={faChartPie} />
-              <NavItem title="Discover" link={RoutesData.Discover.path} icon={faChartPie} />
-              <NavItem title="Quick Workout" link={RoutesData.QuickWorkout.path} icon={faChartPie} />
-              <NavItem title="Stretches" link={RoutesData.Stretches.path} icon={faChartPie} />
+              <NavItem title="Exercise" link={RoutesData.Exercise.path} icon={faDumbbell} />
+              <NavItem title="Challenges" link={RoutesData.Challenges.path} icon={faChildReaching} />
+              <NavItem title="Category" link={RoutesData.Categories.path} icon={faList} />
+              <NavItem title="Discover" link={RoutesData.Discover.path} icon={faCompass} />
+              <NavItem title="Quick Workout" link={RoutesData.QuickWorkout.path} icon={faPersonPraying} />
+              <NavItem title="Stretches" link={RoutesData.Stretches.path} icon={faPersonWalking} />
 
               {/* <NavItem title="Overview" link={RoutesData.DashboardOverview.path} icon={faChartPie} /> */}
               {/* <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
               {/* <NavItem title="Transactions" icon={faHandHoldingUsd} link={RoutesData.Transactions.path} /> */}
               <NavItem title="Settings" icon={faCog} link={RoutesData.Settings.path} />
-              <NavItem title="Users" icon={faCog} link={RoutesData.Users.path} />
+              <NavItem title="Users" icon={faUsers} link={RoutesData.Users.path} />
               {/* <NavItem external title="Calendar" link="https://demo.themesberg.com/volt-pro-react/#/calendar" target="_blank" badgeText="Pro" icon={faCalendarAlt} /> */}
               {/* <NavItem external title="Map" link="https://demo.themesberg.com/volt-pro-react/#/map" target="_blank" badgeText="Pro" icon={faMapPin} /> */}
 
