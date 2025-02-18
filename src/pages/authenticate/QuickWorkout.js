@@ -46,7 +46,10 @@ const QuickWorkout = () => {
                         View_Exercise: {
                             label: "View Exercise",
                             type: "Button",
-                            navigateRoute: "/admin/quickworkoutexercise"
+                            navigateRoute: "/admin/quickworkoutexercise",
+                            queryparams: {
+                                quickworkoutid: item._id,
+                            },
                         },
                         Pro: item.isActive,
                         Action: 1

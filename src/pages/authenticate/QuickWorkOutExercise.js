@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageTrafficTable } from "../../components/Tables";
 import { getAPIData, postAPIData } from "../../utils/getAPIData";
 import { Button, Form, Modal } from "react-bootstrap";
@@ -9,15 +9,18 @@ import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
 
 const QuickWorkOutExercise = () => {
-    const [challengesData, setChallengesData] = useState([]);
+    const [quickWorkOutExercise, setQuickWorkOutExercise] = useState([]);
+    const [searchParams] = useSearchParams();
+    const [errormsg, setErrormsg] = useState("")
     const [showModal, setShowModal] = useState(false);
     const [updateUser, setUpdateUser] = useState({});
     const [deleteUser, setDeleteUser] = useState({
         Id: 0,
         IsConfirmed: false
     });
-    
+
     const navigate = useNavigate();
+    const quickworkout_id = searchParams.get('quickworkoutid');
     let token = localStorage.getItem('token');
 
     const {
@@ -33,13 +36,13 @@ const QuickWorkOutExercise = () => {
     }
 
     const fetchData = async () => {
-        let { data, error, status } = await getAPIData('/challenges', token);
+        let { data, error, status } = await getAPIData(`/getExerciseByQuickworkoutId/${quickworkout_id}`, token);
 
         if (!error) {
-            setChallengesData([]);
-            if (data.challenges.length > 0) {
-                data.challenges.map((item) => {
-                    setChallengesData((prev) => [...prev, {
+            setQuickWorkOutExercise([]);
+            if (data.quickworkoutexercises.length > 0) {
+                data.quickworkoutexercises.map((item) => {
+                    setQuickWorkOutExercise((prev) => [...prev, {
                         Id: item._id,
                         Image: item.image,
                         Challenges_Name: item.challengesName,
@@ -57,6 +60,14 @@ const QuickWorkOutExercise = () => {
             if (status === 401) {
                 localStorage.removeItem('token');
                 navigate('/');
+            }
+            else {
+                if (data.message) {
+                    setErrormsg(data.message);
+                }
+                else {
+                    setErrormsg("Something Went Wrong!")
+                }
             }
         }
     }
@@ -83,12 +94,24 @@ const QuickWorkOutExercise = () => {
 
     }
 
+
+    const queryParams = new URLSearchParams({
+        quickworkoutid: quickworkout_id,
+    }).toString();
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={() => navigate('/admin/challenges/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Challenges
+            <Button variant="primary" className="my-2" onClick={() => navigate(`/admin/addquickworkoutexercise?${queryParams}`)}>
+                <FontAwesomeIcon icon={faPlus} /> Add New QuickWorkOut Exercise
             </Button>
-            {challengesData.length > 0 && <PageTrafficTable data={challengesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser}/>}
+            {quickWorkOutExercise.length > 0 ? <PageTrafficTable
+                data={quickWorkOutExercise}
+                handleModal={setShowModal}
+                setUser={setUpdateUser}
+                deleteUser={setDeleteUser}
+            />
+                :
+                <h2>{errormsg}</h2>
+            }
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>

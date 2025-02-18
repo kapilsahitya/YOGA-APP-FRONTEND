@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageTrafficTable } from "../../components/Tables";
 import { getAPIData, postAPIData } from "../../utils/getAPIData";
 import { Button, Form, Modal } from "react-bootstrap";
@@ -9,15 +9,18 @@ import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
 
 const DiscoverExercise = () => {
-    const [challengesData, setChallengesData] = useState([]);
+    const [discoverExercises, setdiscoverExercises] = useState([]);
+    const [searchParams] = useSearchParams();
+    const [errormsg, setErrormsg] = useState("")
     const [showModal, setShowModal] = useState(false);
     const [updateUser, setUpdateUser] = useState({});
     const [deleteUser, setDeleteUser] = useState({
         Id: 0,
         IsConfirmed: false
     });
-    
+
     const navigate = useNavigate();
+    const discover_id = searchParams.get('discoverid');
     let token = localStorage.getItem('token');
 
     const {
@@ -33,13 +36,13 @@ const DiscoverExercise = () => {
     }
 
     const fetchData = async () => {
-        let { data, error, status } = await getAPIData('/challenges', token);
+        let { data, error, status } = await getAPIData(`/getExerciseByDiscoverId/${discover_id}`, token);
 
         if (!error) {
-            setChallengesData([]);
-            if (data.challenges.length > 0) {
-                data.challenges.map((item) => {
-                    setChallengesData((prev) => [...prev, {
+            setdiscoverExercises([]);
+            if (data.discoverexercises.length > 0) {
+                data.discoverexercises.map((item) => {
+                    setdiscoverExercises((prev) => [...prev, {
                         Id: item._id,
                         Image: item.image,
                         Challenges_Name: item.challengesName,
@@ -57,6 +60,14 @@ const DiscoverExercise = () => {
             if (status === 401) {
                 localStorage.removeItem('token');
                 navigate('/');
+            }
+            else {
+                if (data.message) {
+                    setErrormsg(data.message);
+                }
+                else {
+                    setErrormsg("Something Went Wrong!")
+                }
             }
         }
     }
@@ -83,12 +94,23 @@ const DiscoverExercise = () => {
 
     }
 
+    const queryParams = new URLSearchParams({
+        discoverid : discover_id,
+    }).toString();
+
     return (
         <React.Fragment>
-            <Button variant="primary" className="my-2" onClick={() => navigate('/admin/challenges/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Challenges
+            <Button variant="primary" className="my-2" onClick={() => navigate(`/admin/adddiscoverexercise?${queryParams}`)}>
+                <FontAwesomeIcon icon={faPlus} /> Add New Discover Exercise
             </Button>
-            {challengesData.length > 0 && <PageTrafficTable data={challengesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser}/>}
+            {discoverExercises.length > 0 ? <PageTrafficTable
+                data={discoverExercises}
+                handleModal={setShowModal}
+                setUser={setUpdateUser}
+                deleteUser={setDeleteUser}
+            />
+                : <h2>{errormsg}</h2>
+            }
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
