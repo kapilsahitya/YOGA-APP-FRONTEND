@@ -92,7 +92,7 @@ const WeekDays = () => {
             // handleModal={setShowModal} 
             // setUser={setUpdateUser} 
             // deleteUser={setDeleteUser}
-            /> : <h1>{errormsg}</h1>
+            /> : <h2>{errormsg}</h2>
             }
         </React.Fragment>
     )

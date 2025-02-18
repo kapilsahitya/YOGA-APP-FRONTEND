@@ -46,7 +46,10 @@ const Discover = () => {
                         View_Exercise: {
                             label: "View Exercise",
                             type: "Button",
-                            navigateRoute: "/admin/discoverexercise"
+                            navigateRoute: "/admin/discoverexercise",
+                            queryparams: {
+                                discoverid: item._id,
+                            },
                         },
                         Pro: item.isActive,
                         Action: 1

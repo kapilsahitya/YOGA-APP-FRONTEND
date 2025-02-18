@@ -46,7 +46,10 @@ const Stretches = () => {
                         View_Exercise: {
                             label: "View Exercise",
                             type: "Button",
-                            navigateRoute: "/admin/StretchesExercise"
+                            navigateRoute: "/admin/StretchesExercise",
+                            queryparams: {
+                                stretchesid: item._id,
+                            },
                         },
                         Pro: item.isActive,
                         Action: 1

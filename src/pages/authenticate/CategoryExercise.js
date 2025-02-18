@@ -113,7 +113,7 @@ const ChallengesExercise = () => {
                                                     setUser={setUpdateUser} 
                                                     deleteUser={setDeleteUser}
                                                 />
-                                            : <h1>{errormsg}</h1>}
+                                            : <h2>{errormsg}</h2>}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
