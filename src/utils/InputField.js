@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 
-const InputField = ({ label, type, placeholder, required, setValue, row, defaultValue, min, ...props }) => {
+const InputField = ({ label, type, placeholder, required, setValue, row, defaultValue, min, options,...props }) => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
     const onEditorStateChange = (state) => {
@@ -37,6 +37,12 @@ const InputField = ({ label, type, placeholder, required, setValue, row, default
                     />
                 ) : type === "textarea" ? (
                     <Form.Control as="textarea" rows={row} placeholder={placeholder} required={required} defaultValue={defaultValue} {...props} />
+                ) : type === "multiselect" ? (
+                    <Form.Select multiple {...props}>
+                        {options.length > 0 && options.map((item, index)=>{
+                            return(<option key={index} value={item.Id}>{item.Exercise_Name}</option>)
+                        })}
+                    </Form.Select>
                 ) : (
                     <Form.Control type={type} placeholder={placeholder} required={required} defaultValue={defaultValue} min={min} {...props} />
                 )}

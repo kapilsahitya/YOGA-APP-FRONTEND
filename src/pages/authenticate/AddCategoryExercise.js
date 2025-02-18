@@ -17,22 +17,21 @@ const AddCategoryExercise = () => {
     } = useForm();
 
     const [searchParams] = useSearchParams();
-    const [axercises, setExercises] = useState([]);
+    const [exercisesData, setExercisesData] = useState([]);
     const [errormsg, setErrormsg] = useState("")
     const navigate = useNavigate();
-    const id = searchParams.get('weekid');
+    const id = searchParams.get('categoryid');
     let token = localStorage.getItem('token');
 
     const fetchData = async () => {
-        let { data, error, status } = await getAPIData(`/exercise`, token)
-        // console.log("data", data)
+        let { data, error, status } = await getAPIData(`/exercise`, token);
         if (!error) {
-            setExercises([]);
+            setExercisesData([]);
             if (data.exercises.length > 0) {
                 data.exercises.map((item) => {
-                    setExercises((prev) => [...prev, {
+                    setExercisesData((prev) => [...prev, {
                         Id: item._id,
-                        'Exercise Name': item.daysName,
+                        Exercise_Name: item.exerciseName,
                     }])
                 })
             }
@@ -59,17 +58,16 @@ const AddCategoryExercise = () => {
     }, []);
 
     const submitData = async (values) => {
-
         const formData = {
-            daysName: values.dayName,
-            week_id: id
+            category_id: id,
+            exercise_ids: values.exercise_ids
         }
 
-        let { data, error, status } = await postAPIData("/addDay", formData, token);
+        let { data, error, status } = await postAPIData("/addCategoryexercises", formData, token);
 
         if (!error) {
             if (status === 201) {
-                navigate("/admin/challenges");
+                navigate("/admin/category");
             }
         } else {
             if (status === 401) {
@@ -86,10 +84,9 @@ const AddCategoryExercise = () => {
                 <Form onSubmit={handleSubmit(submitData)}>
                     <InputField
                         label="Select exercise"
-                        type="text"
-                        placeholder="Enter Day name"
-                        required={true}
-                        {...register("dayName")}
+                        type="multiselect"
+                        options={exercisesData}
+                        {...register("exercise_ids")}
                     />
 
                     <Button variant="primary" type="submit" className="mt-4">

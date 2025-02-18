@@ -132,7 +132,6 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser, statu
     };
 
     const handleDaysClick = (navigateroute, id, parentparams) => {
-      console.log("parentparams", parentparams)
       const queryParams = new URLSearchParams(parentparams).toString();
 
       navigate(`${navigateroute}?${queryParams}`);
@@ -168,7 +167,6 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser, statu
               ) : value[1]?.type === "Button" ? (
                 <Button variant="outline-primary" className="mx-1" onClick={() => {
                   // if (value[1].label === "View Days") {
-                    console.log("value[1]", value[1])
                     handleDaysClick(value[1].navigateRoute, data[id].Id, value[1].queryparams)
                   // }
                   // else {

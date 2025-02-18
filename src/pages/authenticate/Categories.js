@@ -46,7 +46,10 @@ const Categories = () => {
                         View_Exercise: {
                             label: "View Exercise",
                             type: "Button",
-                            navigateRoute:"/admin/categoryexercise"
+                            navigateRoute:"/admin/categoryexercise",
+                            queryparams: {
+                                categoriesid : item._id,
+                            },
                         },
                         Pro: item.isActive,
                         Action: 1

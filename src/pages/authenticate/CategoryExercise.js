@@ -8,13 +8,10 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
 
-const ChallengesExercise = () => {
+const CategoriesExercise = () => {
 
     const [searchParams] = useSearchParams();
-    const daysid = searchParams.get('daysid');
-    const week_id = searchParams.get('weekid');
-    const challenges_id = searchParams.get('challengesid');
-    const [challengesExerciseData, setchallengesExerciseData] = useState([]);
+    const [categoriesExerciseData, setCategoriesExerciseData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [updateUser, setUpdateUser] = useState({});
     const [deleteUser, setDeleteUser] = useState({
@@ -24,6 +21,7 @@ const ChallengesExercise = () => {
     const [errormsg, setErrormsg] = useState("")
     
     const navigate = useNavigate();
+    const category_id = searchParams.get('categoriesid');
     let token = localStorage.getItem('token');
 
     const {
@@ -39,18 +37,19 @@ const ChallengesExercise = () => {
     }
 
     const fetchData = async () => {
-        let { data, error, status } = await getAPIData(`/getExerciseByDaysId/${daysid}`, token);
+        let { data, error, status } = await getAPIData(`/getExerciseByCategoryId/${category_id}`, token);
 
         if (!error) {
-            setchallengesExerciseData([]);
-            if (data.challengesexercises.length > 0) {
-                data.challengesexercises.map((item) => {
-                    setchallengesExerciseData((prev) => [...prev, {
-                        Id: item._id,
-                        Image: item.image,
-                        Exercise_Name: item.challengesName,
-                        Description: item.description,
-                        Exercise_Time: item.exerciseTime,
+            setCategoriesExerciseData([]);
+            if (data.categoryexercises.length > 0) {
+                data.categoryexercises.map((item) => {
+                    console.log(item);
+                    setCategoriesExerciseData((prev) => [...prev, {
+                        Id: item.exercise_Id._id,
+                        Image: item.exercise_Id.image,
+                        Exercise_Name: item.exercise_Id.exerciseName,
+                        Description: item.exercise_Id.description,
+                        Exercise_Time: item.exercise_Id.exerciseTime,
                         Pro: item.isActive,
                         Action: 1
                     }])
@@ -96,9 +95,7 @@ const ChallengesExercise = () => {
 
 
     const queryParams = new URLSearchParams({
-        daysid : daysid,
-        weekid: week_id,
-        challengesid: challenges_id
+        categoryid: category_id
 
     }).toString();
 
@@ -107,13 +104,13 @@ const ChallengesExercise = () => {
             <Button variant="primary" className="my-2" onClick={() => navigate(`/admin/addcategoryexercise?${queryParams}`)}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Category Exercise
             </Button>
-            {challengesExerciseData.length > 0 ? <PageTrafficTable 
-                                                    data={challengesExerciseData} 
+            {categoriesExerciseData.length > 0 ? <PageTrafficTable 
+                                                    data={categoriesExerciseData} 
                                                     handleModal={setShowModal} 
                                                     setUser={setUpdateUser} 
                                                     deleteUser={setDeleteUser}
                                                 />
-                                            : <h2>{errormsg}</h2>}
+                                            : <h1>{errormsg}</h1>}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
@@ -169,4 +166,4 @@ const ChallengesExercise = () => {
         </React.Fragment>
     )
 };
-export default ChallengesExercise;
+export default CategoriesExercise;
