@@ -45,7 +45,8 @@ const Stretches = () => {
                         Description: item.description,
                         View_Exercise: {
                             label: "View Exercise",
-                            type: "Button"
+                            type: "Button",
+                            navigateRoute: "/admin/StretchesExercise"
                         },
                         Pro: item.isActive,
                         Action: 1

@@ -49,6 +49,7 @@ import Tabs from "./components/Tabs";
 import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
 import Categories from './authenticate/Categories';
+import AddCategoryExercise from './authenticate/AddCategoryExercise';
 import Exercise from './authenticate/Exercise';
 import AddExercise from './authenticate/AddExercise';
 import Challenges from './authenticate/Challenges';
@@ -60,8 +61,11 @@ import ChallengesExercise from  "./authenticate/ChallengesExercise";
 import AddChallengesExercise from "./authenticate/AddChallengesExercise";
 import CategoryExercise from "./authenticate/CategoryExercise";
 import Discover from './authenticate/Discover';
+import DiscoverExercise from "./authenticate/DiscoverExercise";
 import QuickWorkout from './authenticate/QuickWorkout';
+import QuickWorkOutExercise from "./authenticate/QuickWorkOutExercise";
 import Stretches from './authenticate/Stretches';
+import StretchesExercise from './authenticate/StretchesExercise';
 import AddChallenge from './authenticate/AddChallenge';
 import AddCategory from './authenticate/AddCategory';
 import AddDiscover from './authenticate/AddDiscover';
@@ -141,6 +145,8 @@ export default () => {
       <Route path={RoutesData.ServerError.path} element={<RouteWithLoader component={ServerError} isAuth={isAuth} />} />
 
       <Route path={RoutesData.Categories.path} element={<RouteWithSidebar component={Categories} />} />
+      <Route path={RoutesData.CategoryExercise.path} element={<RouteWithSidebar component={CategoryExercise} />} />
+      <Route path={RoutesData.AddCategoryExercise.path} element={<RouteWithSidebar component={AddCategoryExercise} />} />
       <Route path={RoutesData.Exercise.path} element={<RouteWithSidebar component={Exercise} />} />
       <Route path={RoutesData.Challenges.path} element={<RouteWithSidebar component={Challenges} />} />
       <Route path={RoutesData.Weeks.path} element={<RouteWithSidebar component={Weeks} />} />
@@ -150,8 +156,11 @@ export default () => {
       <Route path={RoutesData.ChallengesExercise.path} element={<RouteWithSidebar component={ChallengesExercise} />} />
       <Route path={RoutesData.AddChallengesExercise.path} element={<RouteWithSidebar component={AddChallengesExercise} />} />
       <Route path={RoutesData.Discover.path} element={<RouteWithSidebar component={Discover} />} />
+      <Route path={RoutesData.DiscoverExercise.path} element={<RouteWithSidebar component={DiscoverExercise} />} />
       <Route path={RoutesData.QuickWorkout.path} element={<RouteWithSidebar component={QuickWorkout} />} />
+      <Route path={RoutesData.QuickWorkOutExercise.path} element={<RouteWithSidebar component={QuickWorkOutExercise} />} />
       <Route path={RoutesData.Stretches.path} element={<RouteWithSidebar component={Stretches} />} />
+      <Route path={RoutesData.StretchesExercise.path} element={<RouteWithSidebar component={StretchesExercise} />} />
       <Route path={RoutesData.AddExercise.path} element={<RouteWithSidebar component={AddExercise} />} />
       <Route path={RoutesData.AddChallenge.path} element={<RouteWithSidebar component={AddChallenge} />} />
       <Route path={RoutesData.AddCategory.path} element={<RouteWithSidebar component={AddCategory} />} />
