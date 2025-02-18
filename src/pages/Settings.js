@@ -1,17 +1,41 @@
-import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBoxOpen, faCartArrowDown, faChartPie, faChevronDown, faClipboard, faCommentDots, faFileAlt, faPlus, faRocket, faStore } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Button, Dropdown } from "react-bootstrap";
-import { ChoosePhotoWidget, ProfileCardWidget } from "../components/Widgets";
-import { GeneralInfoForm } from "../components/Forms";
+import React, { useState } from "react";
+import { Card, Form } from "react-bootstrap";
+import { postAPIData } from "../utils/getAPIData";
 
-import Profile3 from "../assets/img/team/profile-picture-3.jpg";
+const ToggleSwitch = ({ id, label }) => {
+  const [switchChecked, setSwitchChecked] = useState(true);
+  let token = localStorage.getItem('token');
 
+  const updateStatus = async (index) => {
+    const { data, error, status } = await postAPIData('URL', "value ? value : null", token);
+  }
 
-export default () => {
   return (
-    <>
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div className="d-flex mb-2">
+      <label className="col-2">{label}</label>
+      <Form.Check type="switch"
+        className="col-9"
+        checked={switchChecked}
+        onChange={() => {
+          setSwitchChecked(!switchChecked);
+          updateStatus(id);
+        }}
+      />
+    </div>
+  )
+}
+
+const Settings = () => {
+  const SettingList = ["Challenges", "Category", "Discover", "Quick Workout", "Stretches"];
+  return (
+    <React.Fragment>
+      <Card border="light" className="bg-white shadow-sm mb-4">
+        <Card.Body>
+          <h5 className="mb-4">Exercise Setting</h5>
+          {SettingList.map((item, index) => <ToggleSwitch id={index} label={item} />)}
+        </Card.Body>
+      </Card>
+      {/* <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <Dropdown>
           <Dropdown.Toggle as={Button} variant="secondary" className="text-dark me-2">
             <FontAwesomeIcon icon={faPlus} className="me-2" />
@@ -84,7 +108,8 @@ export default () => {
             </Col>
           </Row>
         </Col>
-      </Row>
-    </>
+      </Row> */}
+    </React.Fragment>
   );
 };
+export default Settings;
