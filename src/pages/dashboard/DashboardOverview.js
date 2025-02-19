@@ -62,7 +62,7 @@ export default () => {
         </ButtonGroup>
       </div> */}
 
-      <Row className="justify-content-md-center">
+      <Row className="justify-content-start">
         {/* <Col xs={12} className="mb-4 d-none d-sm-block">
           <SalesValueWidget
             title="Sales Value"
@@ -79,7 +79,7 @@ export default () => {
         </Col> */}
         {userData.length > 0 && userData.map((item,index)=>{
           return(
-            <Col xs={12} sm={6} xl={4} className="mb-4" key={index}>
+            <Col xs={12} sm={6} xl={3} className="mb-4" key={index}>
               <CounterWidget
                 category={`TOTAL ${String(item[0]).toUpperCase()}`}
                 title={item[1]}
