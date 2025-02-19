@@ -164,6 +164,17 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser, statu
                     <FontAwesomeIcon icon={faTrashAlt} /> Delete
                   </Button>
                 </React.Fragment>
+              ) : value[0] === "DeleteAction" ? (
+                <React.Fragment>
+                  <Button variant="outline-danger" className="mx-1" onClick={() => {
+                    deleteUser({
+                      Id: data[id].Id,
+                      IsConfirmed: true
+                    })
+                  }}>
+                    <FontAwesomeIcon icon={faTrashAlt} /> Delete
+                  </Button>
+                </React.Fragment>
               ) : value[1]?.type === "Button" ? (
                 <Button variant="outline-primary" className="mx-1" onClick={() => {
                   // if (value[1].label === "View Days") {

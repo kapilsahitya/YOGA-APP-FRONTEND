@@ -44,15 +44,12 @@ const StretchesExercise = () => {
                 data.stretchesexercises.map((item) => {
                     setStretchesExercise((prev) => [...prev, {
                         Id: item._id,
-                        Image: item.image,
-                        Challenges_Name: item.challengesName,
-                        Description: item.description,
-                        Add_Week: {
-                            label: "View Week",
-                            type: "Button"
-                        },
+                        Image: item.exercise_Id.image,
+                        Exercise_Name: item.exercise_Id.exerciseName,
+                        Description: item.exercise_Id.description,
+                        Exercise_Time: item.exercise_Id.exerciseTime,
                         Pro: item.isActive,
-                        Action: 1
+                        DeleteAction: 1
                     }])
                 })
             }

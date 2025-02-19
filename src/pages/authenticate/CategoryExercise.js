@@ -45,13 +45,13 @@ const CategoriesExercise = () => {
                 data.categoryexercises.map((item) => {
                     console.log(item);
                     setCategoriesExerciseData((prev) => [...prev, {
-                        Id: item.exercise_Id._id,
+                        Id: item._id,
                         Image: item.exercise_Id.image,
                         Exercise_Name: item.exercise_Id.exerciseName,
                         Description: item.exercise_Id.description,
                         Exercise_Time: item.exercise_Id.exerciseTime,
                         Pro: item.isActive,
-                        Action: 1
+                        DeleteAction: 1
                     }])
                 })
             }

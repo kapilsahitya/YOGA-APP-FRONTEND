@@ -29,7 +29,8 @@ const WeekDays = () => {
                 data.days.map((item) => {
                     setWeekDaysData((prev) => [...prev, {
                         Id: item._id,
-                        'Day Name': item.daysName,
+                        'Week Name': item.week_Id.weekName,
+                        'Days': item.daysName,
                         View_Exercise: {
                             label: "View Exercise",
                             type: "Button",

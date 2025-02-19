@@ -28,7 +28,7 @@ const Weeks = () => {
                 data.weeks.map((item) => {
                     setWeeksData((prev) => [...prev, {
                         Id: item._id,
-                        'Challenges Name': item.challengesName,
+                        'Challenges Name': item.challenges_Id.challengesName,
                         'Week Name': item.weekName,
                         VIEW_DAYS: {
                             label: "View Days",
