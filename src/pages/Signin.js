@@ -1,32 +1,35 @@
 
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF, faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Form, Card, Button, FormCheck, Container, InputGroup, Toast } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
-import { RoutesData } from "../routes";
 import BgImage from "../assets/img/illustrations/signin.svg";
 import { useForm } from "react-hook-form";
 import { postAPIData } from "../utils/getAPIData";
+import { toast } from "react-toastify";
 
 export default () => {
   const {
     register,
     handleSubmit,
-    formState : { errors }
+    formState: { errors }
   } = useForm();
   const navigate = useNavigate();
-  
+
   const handleLogin = async (Values) => {
-    let {data, error} = await postAPIData('/login', Values);
-    
-    if(!error){
+    let { data, error, status } = await postAPIData('/login', Values);
+    if (!error) {
       localStorage.setItem('token', data.token)
+      toast.success("Login Successful!", { position: "top-center", autoClose: 2500 })
       navigate('/dashboard');
     }
-    else{
-      console.log(data);
+    else {
+      if (status === 400) {
+        toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+      } else {
+        toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
+      }
     }
   }
 
@@ -47,7 +50,7 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faEnvelope} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus required type="email" placeholder="example@company.com" {...register('email')}/>
+                      <Form.Control autoFocus required type="email" placeholder="example@company.com" {...register('email')} />
                     </InputGroup>
                   </Form.Group>
                   <Form.Group>
@@ -57,7 +60,7 @@ export default () => {
                         <InputGroup.Text>
                           <FontAwesomeIcon icon={faUnlockAlt} />
                         </InputGroup.Text>
-                        <Form.Control required type="password" placeholder="Password" {...register('password')}/>
+                        <Form.Control required type="password" placeholder="Password" {...register('password')} />
                       </InputGroup>
                     </Form.Group>
                     <div className="d-flex justify-content-between align-items-center mb-4">

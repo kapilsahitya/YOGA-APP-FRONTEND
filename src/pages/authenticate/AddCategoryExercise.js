@@ -7,6 +7,7 @@ import { Button, Card, Form, Modal } from "react-bootstrap";
 // import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
+import { toast } from "react-toastify";
 
 const AddCategoryExercise = () => {
 
@@ -67,12 +68,16 @@ const AddCategoryExercise = () => {
 
         if (!error) {
             if (status === 201) {
+                toast.success(`${data.message}`, { position: "top-center", autoClose: 2500 })
                 navigate("/admin/category");
             }
         } else {
-            if (status === 401) {
+            if (status === 401 || status === 400) {
                 localStorage.removeItem("token");
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
                 navigate("/");
+            } else {
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
             }
         }
     };

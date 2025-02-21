@@ -7,6 +7,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { PageTrafficTable } from "../../components/Tables";
 import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
+import { toast } from "react-toastify";
 
 const Stretches = () => {
     const [stretchesData, setStretchesData] = useState([]);
@@ -72,10 +73,12 @@ const Stretches = () => {
         let { data, error, status } = await postAPIData(`/updateStretches/${updateUser.Id}`, values, token);
 
         if (!error) {
+            toast.success("Update was successful!", { position: "top-center", autoClose: 2500 })
             fetchData();
         } else {
-            if (status === 401) {
+            if (status === 401 || status === 400) {
                 localStorage.removeItem('token');
+                
                 navigate('/');
             }
         }

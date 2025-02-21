@@ -7,7 +7,7 @@ const ToggleSwitch = ({ id, label }) => {
   let token = localStorage.getItem('token');
 
   const updateStatus = async (index) => {
-    const { data, error, status } = await postAPIData('URL', "value ? value : null", token);
+    // const { data, error, status } = await postAPIData('URL', "value ? value : null", token);
   }
 
   return (
