@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { postAPIData } from "../../utils/getAPIData";
-import { Button, Card, Form, Modal } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import InputField from "../../utils/InputField";
 import { toast } from "react-toastify";
@@ -9,8 +9,7 @@ import { toast } from "react-toastify";
 const AddWeekDays = () => {
     const {
         register,
-        handleSubmit,
-        formState: { errors },
+        handleSubmit
     } = useForm();
 
     const [searchParams] = useSearchParams();

@@ -10,8 +10,7 @@ const AddExercise = () => {
     const {
         register,
         handleSubmit,
-        setValue,
-        formState: { errors }
+        setValue
     } = useForm();
     const navigate = useNavigate();
 

@@ -73,15 +73,15 @@ const Categories = () => {
         let { data, error, status } = await postAPIData(`/updateCategory/${updateUser.Id}`, values, token);
 
         if (!error) {
-            toast.success("Update was successful!", { position: "top-center", autoClose: 2500 })
+            toast.success("Update was successful!", { position: "top-center", autoClose: 2500 });
             fetchData();
         } else {
             if (status === 401 || status === 400) {
                 localStorage.removeItem('token');
-                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
                 navigate('/');
             } else {
-                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
         }
         setShowModal(false);

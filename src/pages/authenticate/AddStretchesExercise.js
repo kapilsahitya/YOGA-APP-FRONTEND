@@ -7,11 +7,9 @@ import InputField from "../../utils/InputField";
 import { toast } from "react-toastify";
 
 const AddStretchesExercise = () => {
-
     const {
         register,
-        handleSubmit,
-        formState: { errors },
+        handleSubmit
     } = useForm();
 
     const [searchParams] = useSearchParams();

@@ -9,8 +9,7 @@ import { toast } from "react-toastify";
 const AddDiscover = () => {
     const {
         register,
-        handleSubmit,
-        formState: { errors }
+        handleSubmit
     } = useForm();
     const navigate = useNavigate();
 

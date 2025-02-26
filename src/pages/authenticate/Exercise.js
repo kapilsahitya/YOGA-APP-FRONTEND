@@ -140,6 +140,7 @@ const Exercise = () => {
                             label="Exercise Time (in minutes)"
                             type="number"
                             placeholder="0"
+                            min={0}
                             defaultValue={updateUser?.Exercise_Time}
                             {...register('exerciseTime')}
                         />

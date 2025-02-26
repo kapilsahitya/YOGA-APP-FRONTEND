@@ -90,10 +90,14 @@ const Stretches = () => {
         
         if (!error) {
             fetchData();
+            toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
         } else {
-            if (status === 401) {
+            if (status === 401 || status === 400) {
                 localStorage.removeItem('token');
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
                 navigate('/');
+            }else{
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
         }
         setDeleteUser({ Id: 0, IsConfirmed: false })

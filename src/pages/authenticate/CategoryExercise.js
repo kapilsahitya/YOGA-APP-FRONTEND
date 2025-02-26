@@ -51,7 +51,7 @@ const CategoriesExercise = () => {
                         Description: item.exercise_Id.description,
                         Exercise_Time: item.exercise_Id.exerciseTime,
                         Pro: item.isActive,
-                        DeleteAction: 1
+                        Action: 2
                     }])
                 })
             }

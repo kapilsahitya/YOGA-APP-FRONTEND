@@ -9,8 +9,7 @@ import { toast } from "react-toastify";
 const AddWorkout = () => {
     const {
         register,
-        handleSubmit,
-        formState: { errors }
+        handleSubmit
     } = useForm();
     const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ const AddWorkout = () => {
         if (!error) {
             if (status === 201) {
                 toast.success(`${data.message}`, { position: "top-center", autoClose: 2500 })
-                navigate('/admin/workout');
+                navigate('/admin/quickworkout');
             }
         } else {
             if (status === 401 || status === 400) {

@@ -9,8 +9,7 @@ import { toast } from "react-toastify";
 const AddQuickWorkOutExercise = () => {
     const {
         register,
-        handleSubmit,
-        formState: { errors },
+        handleSubmit
     } = useForm();
 
     const [searchParams] = useSearchParams();

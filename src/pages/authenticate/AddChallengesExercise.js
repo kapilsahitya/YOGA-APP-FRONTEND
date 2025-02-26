@@ -7,25 +7,21 @@ import InputField from "../../utils/InputField";
 import { toast } from "react-toastify";
 
 const AddChallengesExercise = () => {
-
     const {
         register,
-        handleSubmit,
-        formState: { errors },
+        handleSubmit
     } = useForm();
 
     const [searchParams] = useSearchParams();
     const [exercisesData, setExercisesData] = useState([]);
     const [errormsg, setErrormsg] = useState("")
     const navigate = useNavigate();
-    const week_id = searchParams.get('weekid');
     const days_id = searchParams.get('daysid');
-    const challenges_id = searchParams.get('challengesid');
     let token = localStorage.getItem('token');
 
     const fetchData = async () => {
         let { data, error, status } = await getAPIData(`/exercise`, token)
-        // console.log("data", data)
+    
         if (!error) {
             setExercisesData([]);
             if (data.exercises.length > 0) {
@@ -59,7 +55,6 @@ const AddChallengesExercise = () => {
     }, []);
 
     const submitData = async (values) => {
-
         const formData = {
             day_id: days_id,
             exercise_ids: values.exercise_ids

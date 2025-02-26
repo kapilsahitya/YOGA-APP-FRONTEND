@@ -7,11 +7,9 @@ import InputField from "../../utils/InputField";
 import { toast } from "react-toastify";
 
 const AddDiscoverExercise = () => {
-
     const {
         register,
-        handleSubmit,
-        formState: { errors },
+        handleSubmit
     } = useForm();
 
     const [searchParams] = useSearchParams();
@@ -56,7 +54,6 @@ const AddDiscoverExercise = () => {
     }, []);
 
     const submitData = async (values) => {
-
         const formData = {
             discover_id: id,
             exercise_ids: values.exercise_ids
