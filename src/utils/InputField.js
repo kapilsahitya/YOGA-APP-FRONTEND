@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 
-const InputField = ({ label, type, placeholder, required, setValue, row, defaultValue, min, options,...props }) => {
+const InputField = ({ label, type, placeholder, setValue, row, defaultValue, min, errors,options,...props }) => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
     const onEditorStateChange = (state) => {
@@ -19,13 +19,14 @@ const InputField = ({ label, type, placeholder, required, setValue, row, default
                 const rowConvert = convertFromHTML(defaultValue);
                 const contentState = ContentState.createFromBlockArray(rowConvert.contentBlocks, rowConvert.entityMap);
                 setEditorState(EditorState.createWithContent(contentState))
+                setValue(`${props.name}`, defaultValue);
             }
         }
     }, []);
 
     return (
         <React.Fragment>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-2">
                 {label && <Form.Label>{label}</Form.Label>}
                 {type === "rte" ? (
                     <Editor
@@ -36,7 +37,7 @@ const InputField = ({ label, type, placeholder, required, setValue, row, default
                         editorClassName="mx-2"
                     />
                 ) : type === "textarea" ? (
-                    <Form.Control as="textarea" rows={row} placeholder={placeholder} required={required} defaultValue={defaultValue} {...props} />
+                    <Form.Control as="textarea" rows={row} placeholder={placeholder} defaultValue={defaultValue} {...props} />
                 ) : type === "multiselect" ? (
                     <Form.Select multiple {...props}>
                         {options.length > 0 && options.map((item, index)=>{
@@ -44,9 +45,9 @@ const InputField = ({ label, type, placeholder, required, setValue, row, default
                         })}
                     </Form.Select>
                 ) : (
-                    <Form.Control type={type} placeholder={placeholder} required={required} defaultValue={defaultValue} min={min} {...props} />
+                    <Form.Control type={type} placeholder={placeholder} defaultValue={defaultValue} min={min} {...props} />
                 )}
-
+                <span className="error text-danger d-block">{errors && errors.message}</span>
             </Form.Group>
         </React.Fragment>
     )

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAPIData, postAPIData } from "../../utils/getAPIData";
 import { useNavigate } from "react-router-dom";
 import { PageTrafficTable } from "../../components/Tables";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import InputField from "../../utils/InputField";
@@ -23,7 +23,8 @@ const Categories = () => {
     const {
         register,
         handleSubmit,
-        setValue
+        setValue,
+        formState: { errors }
     } = useForm();
 
     const handleClose = () => {
@@ -60,7 +61,12 @@ const Categories = () => {
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
                 navigate('/');
+            } else if (status === 400) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
+            } else {
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
         }
     }
@@ -76,10 +82,12 @@ const Categories = () => {
             toast.success("Update was successful!", { position: "top-center", autoClose: 2500 });
             fetchData();
         } else {
-            if (status === 401 || status === 400) {
+            if (status === 401) {
                 localStorage.removeItem('token');
                 toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
                 navigate('/');
+            } else if (status === 400) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
             } else {
                 toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
@@ -94,10 +102,12 @@ const Categories = () => {
             fetchData();
             toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
         } else {
-            if (status === 401 || status === 400) {
+            if (status === 401) {
                 localStorage.removeItem('token');
                 toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
                 navigate('/');
+            } else if (status === 400) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
             } else {
                 toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
             }
@@ -126,7 +136,9 @@ const Categories = () => {
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/category/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Category
             </Button>
-            {categoriesData.length > 0 && <PageTrafficTable data={categoriesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange} />}
+            {categoriesData.length > 0 ?
+                <PageTrafficTable data={categoriesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange} /> :
+                <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
@@ -139,7 +151,8 @@ const Categories = () => {
                             label="Categoty"
                             placeholder="Categoty"
                             defaultValue={updateUser?.Category}
-                            {...register('categoryName')}
+                            errors={errors['categoryName']}
+                            {...register('categoryName', { required: "Category is required." })}
                         />
 
                         <InputField
@@ -148,7 +161,8 @@ const Categories = () => {
                             row="3"
                             placeholder="Description"
                             defaultValue={updateUser?.Description}
-                            {...register('description')}
+                            errors={errors['description']}
+                            {...register('description', { required: "Description is required." })}
                         />
 
                     </Modal.Body>

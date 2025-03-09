@@ -7,11 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faList, faDumbbell, faChartPie, faCog, faChildReaching, faPersonWalking, faCompass, faUsers, faTimes, faPersonPraying, faMapPin, faInbox, faRocket } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-
 import { RoutesData } from "../routes";
-import ThemesbergLogo from "../assets/img/themesberg.svg";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
-import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 
 export default (props = {}) => {
   const location = useLocation();
@@ -107,10 +104,6 @@ export default (props = {}) => {
               <NavItem title="Discover" link={RoutesData.Discover.path} icon={faCompass} />
               <NavItem title="Quick Workout" link={RoutesData.QuickWorkout.path} icon={faPersonPraying} />
               <NavItem title="Stretches" link={RoutesData.Stretches.path} icon={faPersonWalking} />
-
-              {/* <NavItem title="Overview" link={RoutesData.DashboardOverview.path} icon={faChartPie} /> */}
-              {/* <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
-              {/* <NavItem title="Transactions" icon={faHandHoldingUsd} link={RoutesData.Transactions.path} /> */}
               <NavItem title="Settings" icon={faCog} link={RoutesData.Settings.path} />
               <NavItem title="Users" icon={faUsers} link={RoutesData.Users.path} />
               {/* <NavItem external title="Calendar" link="https://demo.themesberg.com/volt-pro-react/#/calendar" target="_blank" badgeText="Pro" icon={faCalendarAlt} /> */}
@@ -134,34 +127,6 @@ export default (props = {}) => {
 
               {/* <Dropdown.Divider className="my-3 border-indigo" /> */}
 
-              {/* <CollapsableNavItem eventKey="documentation/" title="Getting Started" icon={faBook}>
-                <NavItem title="Overview" link={RoutesData.DocsOverview.path} />
-                <NavItem title="Download" link={RoutesData.DocsDownload.path} />
-                <NavItem title="Quick Start" link={RoutesData.DocsQuickStart.path} />
-                <NavItem title="License" link={RoutesData.DocsLicense.path} />
-                <NavItem title="Folder Structure" link={RoutesData.DocsFolderStructure.path} />
-                <NavItem title="Build Tools" link={RoutesData.DocsBuild.path} />
-                <NavItem title="Changelog" link={RoutesData.DocsChangelog.path} />
-              </CollapsableNavItem>
-              <CollapsableNavItem eventKey="components/" title="Components" icon={faBoxOpen}>
-                <NavItem title="Accordion" link={RoutesData.Accordions.path} />
-                <NavItem title="Alerts" link={RoutesData.Alerts.path} />
-                <NavItem title="Badges" link={RoutesData.Badges.path} />
-                <NavItem external title="Widgets" link="https://demo.themesberg.com/volt-pro-react/#/components/widgets" target="_blank" badgeText="Pro" />
-                <NavItem title="Breadcrumbs" link={RoutesData.Breadcrumbs.path} />
-                <NavItem title="Buttons" link={RoutesData.Buttons.path} />
-                <NavItem title="Forms" link={RoutesData.Forms.path} />
-                <NavItem title="Modals" link={RoutesData.Modals.path} />
-                <NavItem title="Navbars" link={RoutesData.Navbars.path} />
-                <NavItem title="Navs" link={RoutesData.Navs.path} />
-                <NavItem title="Pagination" link={RoutesData.Pagination.path} />
-                <NavItem title="Popovers" link={RoutesData.Popovers.path} />
-                <NavItem title="Progress" link={RoutesData.Progress.path} />
-                <NavItem title="Tables" link={RoutesData.Tables.path} />
-                <NavItem title="Tabs" link={RoutesData.Tabs.path} />
-                <NavItem title="Toasts" link={RoutesData.Toasts.path} />
-                <NavItem title="Tooltips" link={RoutesData.Tooltips.path} />
-              </CollapsableNavItem> */}
               {/* <NavItem external title="Themesberg" link="https://themesberg.com" target="_blank" image={ThemesbergLogo} /> */}
               {/* <Button as={Link} to={RoutesData.Upgrade.path} variant="secondary" className="upgrade-to-pro"><FontAwesomeIcon icon={faRocket} className="me-1" /> Upgrade to Pro</Button> */}
             </Nav>
