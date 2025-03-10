@@ -69,6 +69,7 @@ const WeekDays = () => {
                 navigate('/');
             }
             else {
+                setWeekDaysData([]);
                 if (data.message) {
                     setErrormsg(data.message);
                 }

@@ -62,7 +62,7 @@ const AddStretchesExercise = () => {
         if (!error) {
             if (status === 201) {
                 toast.success(`${data.message}`, { position: "top-center", autoClose: 2500 })
-                navigate("/admin/stretches");
+                navigate(`/admin/StretchesExercise?stretchesid=${id}`);
             }
         } else {
             if (status === 401) {

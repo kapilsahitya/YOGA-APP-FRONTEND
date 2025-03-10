@@ -62,6 +62,7 @@ const ChallengesExercise = () => {
                 navigate('/');
             }
             else {
+                setchallengesExerciseData([]);
                 if (data.message) {
                     setErrormsg(data.message);
                 }

@@ -68,6 +68,7 @@ const Weeks = () => {
                 navigate('/');
             }
             else {
+                setWeeksData([]);
                 if (data.message) {
                     setErrormsg(data.message);
                 }

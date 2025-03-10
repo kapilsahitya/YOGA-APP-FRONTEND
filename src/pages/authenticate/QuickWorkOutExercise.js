@@ -44,6 +44,7 @@ const QuickWorkOutExercise = () => {
                 navigate('/');
             }
             else {
+                setQuickWorkOutExercise([]);
                 if (data.message) {
                     setErrormsg(data.message);
                 }
@@ -82,15 +83,34 @@ const QuickWorkOutExercise = () => {
     const queryParams = new URLSearchParams({
         quickworkoutid: quickworkout_id,
     }).toString();
+
+    const statusChange = async (Id, Status) => {
+        let { data, error, status } = await postAPIData(`/changeQuickworkoutexerciseStatus`, {
+            id: Id,
+            status: Status ? 1 : 0
+        }, token);
+
+        if (!error) {
+            fetchData();
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
+    }
+
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate(`/admin/addquickworkoutexercise?${queryParams}`)}>
                 <FontAwesomeIcon icon={faPlus} /> Add New QuickWorkOut Exercise
             </Button>
-            {quickWorkOutExercise.length > 0 ? <PageTrafficTable
-                data={quickWorkOutExercise}
-                deleteUser={setDeleteUser}
-            /> : errormsg ? <h2>{errormsg}</h2> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
+            {quickWorkOutExercise.length > 0 ?
+                <PageTrafficTable
+                    data={quickWorkOutExercise}
+                    deleteUser={setDeleteUser}
+                    statusChange={statusChange}
+                /> : errormsg ? <h2>{errormsg}</h2> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
 
             <Modal show={deleteUser.IsConfirmed} onHide={() => setDeleteUser({ Id: 0, IsConfirmed: false })}>
                 <Modal.Header closeButton>

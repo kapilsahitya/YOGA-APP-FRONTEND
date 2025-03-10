@@ -92,7 +92,7 @@ const Stretches = () => {
                 toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
         }
-        setShowModal(false);
+        handleClose();
     }
 
     const deleteData = async () => {

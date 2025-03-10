@@ -62,7 +62,7 @@ const AddCategoryExercise = () => {
         if (!error) {
             if (status === 201) {
                 toast.success(`${data.message}`, { position: "top-center", autoClose: 2500 })
-                navigate("/admin/category");
+                navigate(`/admin/categoryexercise?categoriesid=${id}`);
             }
         } else {
             if (status === 401) {

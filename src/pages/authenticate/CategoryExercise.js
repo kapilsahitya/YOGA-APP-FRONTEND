@@ -60,6 +60,7 @@ const CategoriesExercise = () => {
                 navigate('/');
             }
             else {
+                setCategoriesExerciseData([]);
                 if (data.message) {
                     setErrormsg(data.message);
                 }
@@ -119,6 +120,21 @@ const CategoriesExercise = () => {
         categoryid: category_id
     }).toString();
 
+    const statusChange = async (Id, Status) => {
+        let { data, error, status } = await postAPIData(`/changeCategoryexerciseStatus`, {
+            id: Id,
+            status: Status ? 1 : 0
+        }, token);
+
+        if (!error) {
+            fetchData();
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                navigate('/');
+            }
+        }
+    }
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate(`/admin/addcategoryexercise?${queryParams}`)}>
@@ -129,6 +145,7 @@ const CategoriesExercise = () => {
                 handleModal={setShowModal}
                 setUser={setUpdateUser}
                 deleteUser={setDeleteUser}
+                statusChange={statusChange}
             /> : errormsg ? <h1>{errormsg}</h1> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>

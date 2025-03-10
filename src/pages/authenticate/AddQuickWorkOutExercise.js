@@ -63,7 +63,7 @@ const AddQuickWorkOutExercise = () => {
         if (!error) {
             if (status === 201) {
                 toast.success(`${data.message}`, { position: "top-center", autoClose: 2500 })
-                navigate("/admin/quickworkout");
+                navigate(`/admin/quickworkoutexercise?quickworkoutid=${id}`);
             }
         } else {
             if (status === 401) {

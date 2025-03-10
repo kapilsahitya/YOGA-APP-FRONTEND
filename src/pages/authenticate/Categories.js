@@ -92,7 +92,7 @@ const Categories = () => {
                 toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
         }
-        setShowModal(false);
+        handleClose();
     }
 
     const deleteData = async () => {
@@ -137,8 +137,13 @@ const Categories = () => {
                 <FontAwesomeIcon icon={faPlus} /> Add New Category
             </Button>
             {categoriesData.length > 0 ?
-                <PageTrafficTable data={categoriesData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange} /> :
-                <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
+                <PageTrafficTable
+                    data={categoriesData}
+                    handleModal={setShowModal}
+                    setUser={setUpdateUser}
+                    deleteUser={setDeleteUser}
+                    statusChange={statusChange}
+                /> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>

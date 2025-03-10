@@ -92,7 +92,7 @@ const Discover = () => {
                 toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
         }
-        setShowModal(false);
+        handleClose();
     }
 
     const deleteData = async () => {
@@ -141,7 +141,14 @@ const Discover = () => {
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/discover/add')}>
                 <FontAwesomeIcon icon={faPlus} /> Add New Discover
             </Button>
-            {discoverData.length > 0 ? <PageTrafficTable data={discoverData} handleModal={setShowModal} setUser={setUpdateUser} deleteUser={setDeleteUser} statusChange={statusChange} /> : <Spinner animation='border' variant='primary' style={{height:80, width:80}} className="position-absolute top-50 start-50"/>}
+            {discoverData.length > 0 ?
+                <PageTrafficTable
+                    data={discoverData}
+                    handleModal={setShowModal}
+                    setUser={setUpdateUser}
+                    deleteUser={setDeleteUser}
+                    statusChange={statusChange}
+                /> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>

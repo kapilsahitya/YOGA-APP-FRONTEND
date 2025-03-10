@@ -117,7 +117,6 @@ export default (props = {}) => {
                 <NavItem title="Sign In" link={RoutesData.Signin.path} />
                 <NavItem title="Sign Up" link={RoutesData.Signup.path} />
                 <NavItem title="Forgot password" link={RoutesData.ForgotPassword.path} />
-                <NavItem title="Reset password" link={RoutesData.ResetPassword.path} />
                 <NavItem title="Lock" link={RoutesData.Lock.path} />
                 <NavItem title="404 Not Found" link={RoutesData.NotFound.path} />
                 <NavItem title="500 Server Error" link={RoutesData.ServerError.path} />
@@ -128,7 +127,6 @@ export default (props = {}) => {
               {/* <Dropdown.Divider className="my-3 border-indigo" /> */}
 
               {/* <NavItem external title="Themesberg" link="https://themesberg.com" target="_blank" image={ThemesbergLogo} /> */}
-              {/* <Button as={Link} to={RoutesData.Upgrade.path} variant="secondary" className="upgrade-to-pro"><FontAwesomeIcon icon={faRocket} className="me-1" /> Upgrade to Pro</Button> */}
             </Nav>
           </div>
         </SimpleBar>
