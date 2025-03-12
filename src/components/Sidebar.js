@@ -4,8 +4,8 @@ import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faList, faDumbbell, faChartPie, faCog, faChildReaching, faPersonWalking, faCompass, faUsers, faTimes, faPersonPraying, faMapPin, faInbox, faRocket } from "@fortawesome/free-solid-svg-icons";
-import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from "react-bootstrap";
+import { faHouse, faList, faDumbbell, faCog, faChildReaching, faPersonWalking, faCompass, faUsers, faTimes, faPersonPraying, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { Nav, Badge, Image, Button, Accordion, Navbar } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { RoutesData } from "../routes";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
@@ -73,31 +73,19 @@ export default (props = {}) => {
           <span className="navbar-toggler-icon" />
         </Navbar.Toggle>
       </Navbar>
-      <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
+      <CSSTransition timeout={300} classNames="sidebar-transition">
         <SimpleBar className={`collapse ${showClass} sidebar d-md-block bg-primary text-white`}>
           <div className="sidebar-inner px-4 pt-3">
-            <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
-              <div className="d-flex align-items-center">
-                {/* <div className="user-avatar lg-avatar me-4">
-                  <Image src={ProfilePicture} className="card-img-top rounded-circle border-white" />
-                </div> */}
-                {/* <div className="d-block">
-                  <h6>Hi, Jane</h6>
-                  <Button as={Link} variant="secondary" size="xs" to={RoutesData.Signin.path} className="text-dark">
-                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Sign Out
-                  </Button>
-                </div> */}
+            <div className="user-card pb-4 d-flex d-md-none align-items-center justify-content-between justify-content-md-center">
+              <div className="user-avatar lg-avatar me-4">
+                <Image src={ReactHero} className="card-img-top border-white" />
               </div>
-              <Nav.Link onClick={onCollapse} className="collapse-close d-md-none" as={Link}>
-                <FontAwesomeIcon icon={faTimes} />
-              </Nav.Link>
               <Nav.Link className="collapse-close d-md-none" onClick={onCollapse} as={Link}>
                 <FontAwesomeIcon icon={faTimes} />
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Dashboard" link={RoutesData.DashboardOverview.path} icon={faHouse}/>
-
+              <NavItem title="Dashboard" link={RoutesData.DashboardOverview.path} icon={faHouse} />
               <NavItem title="Exercise" link={RoutesData.Exercise.path} icon={faDumbbell} />
               <NavItem title="Challenges" link={RoutesData.Challenges.path} icon={faChildReaching} />
               <NavItem title="Category" link={RoutesData.Categories.path} icon={faList} />
@@ -106,27 +94,6 @@ export default (props = {}) => {
               <NavItem title="Stretches" link={RoutesData.Stretches.path} icon={faPersonWalking} />
               <NavItem title="Settings" icon={faCog} link={RoutesData.Settings.path} />
               <NavItem title="Users" icon={faUsers} link={RoutesData.Users.path} />
-              {/* <NavItem external title="Calendar" link="https://demo.themesberg.com/volt-pro-react/#/calendar" target="_blank" badgeText="Pro" icon={faCalendarAlt} /> */}
-              {/* <NavItem external title="Map" link="https://demo.themesberg.com/volt-pro-react/#/map" target="_blank" badgeText="Pro" icon={faMapPin} /> */}
-
-              {/* <CollapsableNavItem eventKey="tables/" title="Tables" icon={faTable}>
-                <NavItem title="Bootstrap Table" link={RoutesData.BootstrapTables.path} />
-              </CollapsableNavItem> */}
-
-              {/* <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}>
-                <NavItem title="Sign In" link={RoutesData.Signin.path} />
-                <NavItem title="Sign Up" link={RoutesData.Signup.path} />
-                <NavItem title="Forgot password" link={RoutesData.ForgotPassword.path} />
-                <NavItem title="Lock" link={RoutesData.Lock.path} />
-                <NavItem title="404 Not Found" link={RoutesData.NotFound.path} />
-                <NavItem title="500 Server Error" link={RoutesData.ServerError.path} />
-              </CollapsableNavItem> */}
-
-              {/* <NavItem external title="Plugins" link="https://demo.themesberg.com/volt-pro-react/#/plugins/datatable" target="_blank" badgeText="Pro" icon={faChartPie} /> */}
-
-              {/* <Dropdown.Divider className="my-3 border-indigo" /> */}
-
-              {/* <NavItem external title="Themesberg" link="https://themesberg.com" target="_blank" image={ThemesbergLogo} /> */}
             </Nav>
           </div>
         </SimpleBar>

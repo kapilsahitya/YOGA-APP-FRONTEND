@@ -67,11 +67,11 @@ export const CounterWidget = (props) => {
     <Card border="light" className="shadow-sm">
       <Card.Body>
         <Row>
-          <Col sm={9}>
+          <Col className="col-9">
             <p style={{ fontSize: '18px' }}>{category}</p>
             <h5 className="mb-1">{title}</h5>
           </Col>
-          <Col sm={3} className="d-flex">
+          <Col className="col-3">
             <div className={`icon icon-shape rounded me-4 me-sm-0`}>
               <FontAwesomeIcon icon={icon} />
             </div>
