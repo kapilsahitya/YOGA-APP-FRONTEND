@@ -73,7 +73,7 @@ import AddCategory from './authenticate/AddCategory';
 import AddDiscover from './authenticate/AddDiscover';
 import AddWorkout from './authenticate/AddWorkout';
 import AddStretches from './authenticate/AddStreches';
-import Users from './Users';
+import Users from './authenticate/User';
 import Plan from './authenticate/Plan';
 import AddPlan from './authenticate/AddPlan';
 
