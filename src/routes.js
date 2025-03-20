@@ -15,6 +15,8 @@ export const RoutesData = {
     NotFound: { path: "/404" },
     ServerError: { path: "/500" },
 
+    Plan: { path: "/admin/plan" },
+    AddPlan: { path: "/admin/plan/add" },
     ChangePassword: { path: "/admin/change-password" },
     Exercise: { path: "/admin/exercise" },
     Challenges: { path: "/admin/challenges" },

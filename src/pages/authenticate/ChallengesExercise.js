@@ -55,20 +55,18 @@ const ChallengesExercise = () => {
                         Action: 2
                     }])
                 })
+            } else if (data.challengesexercises.length < 1) {
+                setErrormsg(data.message);
             }
         } else {
+            setchallengesExerciseData([]);
             if (status === 401) {
                 localStorage.removeItem('token');
                 navigate('/');
-            }
-            else {
-                setchallengesExerciseData([]);
-                if (data.message) {
-                    setErrormsg(data.message);
-                }
-                else {
-                    setErrormsg("Something Went Wrong!")
-                }
+            } else if (status === 400) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+            } else {
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
             }
         }
     }

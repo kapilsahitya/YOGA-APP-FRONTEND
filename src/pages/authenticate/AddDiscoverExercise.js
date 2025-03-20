@@ -31,17 +31,15 @@ const AddDiscoverExercise = () => {
                         Exercise_Name: item.exerciseName,
                     }])
                 })
+            } else if (data.exercises.length < 1) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
             }
-
         }
         else {
             if (status === 401) {
                 localStorage.removeItem('token');
                 toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
                 navigate('/');
-            }
-            else if (status === 400) {
-                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
             } else {
                 toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }

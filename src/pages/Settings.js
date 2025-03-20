@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Spinner } from "react-bootstrap";
 import { getAPIData, postAPIData } from "../utils/getAPIData";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -57,6 +57,7 @@ const ToggleSwitch = ({ id, label, value }) => {
 const Settings = () => {
   const [settingList, setSettingList] = useState([]);
   const [settingId, setSettingId] = useState('');
+  const [errormsg, setErrormsg] = useState('');
   const navigate = useNavigate();
   let token = localStorage.getItem('token');
 
@@ -65,17 +66,17 @@ const Settings = () => {
 
     if (!error) {
       setSettingList([]);
-      if (data.data.success) {
+      if (data?.data?.success) {
         setSettingList(Object.entries(data.data.settings[0]));
         setSettingId(data.data.settings[0].settingId);
+      } else if (data.settings.length < 1) {
+        setErrormsg(data.message);
       }
     } else {
       if (status === 401) {
         localStorage.removeItem('token');
         toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
         navigate('/');
-      } else if (status === 400) {
-        toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
       } else {
         toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
       }
@@ -90,13 +91,13 @@ const Settings = () => {
     <Card border="light" className="bg-white shadow-sm mb-4">
       <Card.Body>
         <h5 className="mb-4">Exercise Setting</h5>
-        {settingList.map((item, index) => {
+        {settingList.length > 0 ? settingList.map((item, index) => {
           if (item[0] !== "_id" && item[0] !== "settingId" && item[0] !== "updatedAt") {
             return (
               <ToggleSwitch id={String(settingId)} value={String(item[1])} label={item[0]} key={index} />
             )
           }
-        })}
+        }) : errormsg ? <h1>{errormsg}</h1> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
       </Card.Body>
     </Card>
   );

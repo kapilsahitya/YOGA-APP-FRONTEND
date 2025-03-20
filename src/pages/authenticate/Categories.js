@@ -17,6 +17,7 @@ const Categories = () => {
         Id: 0,
         IsConfirmed: false
     });
+    const [errormsg, setErrormsg] = useState('');
     const navigate = useNavigate();
     let token = localStorage.getItem('token');
 
@@ -57,14 +58,14 @@ const Categories = () => {
                         Action: 1
                     }])
                 })
+            } else if (data.categories.length < 1) {
+                setErrormsg(data.message);
             }
         } else {
             if (status === 401) {
                 localStorage.removeItem('token');
                 toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
                 navigate('/');
-            } else if (status === 400) {
-                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
             } else {
                 toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
             }
@@ -143,12 +144,12 @@ const Categories = () => {
                     setUser={setUpdateUser}
                     deleteUser={setDeleteUser}
                     statusChange={statusChange}
-                /> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
+                /> : errormsg ? <h1>{errormsg}</h1> : <Spinner animation='border' variant='primary' style={{ height: 80, width: 80 }} className="position-absolute top-50 start-50" />}
 
             <Modal show={showModal} onHide={handleClose}>
                 <Form onSubmit={handleSubmit(updateData)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Update Category</Modal.Title>
+                        <Modal.Title>Edit Category</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <InputField
@@ -169,6 +170,19 @@ const Categories = () => {
                             errors={errors['description']}
                             {...register('description', { required: "Description is required." })}
                         />
+
+                        {/* <InputField
+                            label="Category Image"
+                            type="file"
+                            errors={errors['image']}
+                            {...register('image', { required: "Category image is required." })}
+                        /> */}
+
+                        {/* <InputField
+                            label="Selected Image"
+                            type="image"
+                            defaultValue={updateUser?.Image}
+                        /> */}
 
                     </Modal.Body>
                     <Modal.Footer>

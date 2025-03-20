@@ -4,7 +4,7 @@ import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faList, faDumbbell, faCog, faChildReaching, faPersonWalking, faCompass, faUsers, faTimes, faPersonPraying, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faList, faDumbbell, faCog, faChildReaching, faPersonWalking, faCompass, faUsers, faTimes, faPersonPraying, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Accordion, Navbar } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { RoutesData } from "../routes";
@@ -92,6 +92,7 @@ export default (props = {}) => {
               <NavItem title="Discover" link={RoutesData.Discover.path} icon={faCompass} />
               <NavItem title="Quick Workout" link={RoutesData.QuickWorkout.path} icon={faPersonPraying} />
               <NavItem title="Stretches" link={RoutesData.Stretches.path} icon={faPersonWalking} />
+              <NavItem title="Plan" link={RoutesData.Plan.path} icon={faMoneyBill} />
               <NavItem title="Settings" icon={faCog} link={RoutesData.Settings.path} />
               <NavItem title="Users" icon={faUsers} link={RoutesData.Users.path} />
             </Nav>

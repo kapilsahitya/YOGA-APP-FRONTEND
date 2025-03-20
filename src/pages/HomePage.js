@@ -74,6 +74,8 @@ import AddDiscover from './authenticate/AddDiscover';
 import AddWorkout from './authenticate/AddWorkout';
 import AddStretches from './authenticate/AddStreches';
 import Users from './Users';
+import Plan from './authenticate/Plan';
+import AddPlan from './authenticate/AddPlan';
 
 const RouteWithLoader = ({ component: Component, isAuth, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -147,6 +149,8 @@ export default () => {
 
       <Route path={RoutesData.ChangePassword.path} element={<RouteWithLoader component={ChangePassword} isAuth={isAuth} />} />
       <Route path={RoutesData.Categories.path} element={<RouteWithSidebar component={Categories} />} />
+      <Route path={RoutesData.Plan.path} element={<RouteWithSidebar component={Plan} />} />
+      <Route path={RoutesData.AddPlan.path} element={<RouteWithSidebar component={AddPlan} />} />
       <Route path={RoutesData.CategoryExercise.path} element={<RouteWithSidebar component={CategoryExercise} />} />
       <Route path={RoutesData.AddCategoryExercise.path} element={<RouteWithSidebar component={AddCategoryExercise} />} />
       <Route path={RoutesData.Exercise.path} element={<RouteWithSidebar component={Exercise} />} />

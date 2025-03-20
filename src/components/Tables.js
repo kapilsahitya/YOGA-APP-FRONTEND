@@ -194,7 +194,7 @@ export const PageTrafficTable = ({ data, handleModal, setUser, deleteUser, statu
             <thead className="thead-light">
               <tr>
                 {currentItems.length > 0 && Object.keys(currentItems[0]).map((key, index) => (
-                  <th className="border-0" key={index}>{key === 'Id' ? '#' : key.replace("_", " ")}</th>
+                  <th className="border-0" key={index}>{key === 'Id' ? '#' : key.replaceAll("_", " ")}</th>
                 ))}
               </tr>
             </thead>

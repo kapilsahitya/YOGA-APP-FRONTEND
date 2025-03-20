@@ -1,10 +1,10 @@
 import { ContentState, convertFromHTML, convertFromRaw, EditorState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Image } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 
-const InputField = ({ label, type, placeholder, setValue, row, defaultValue, min, errors,options,...props }) => {
+const InputField = ({ label, type, placeholder, setValue, row, defaultValue, min, errors,options,accept,...props }) => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
     const onEditorStateChange = (state) => {
@@ -26,7 +26,7 @@ const InputField = ({ label, type, placeholder, setValue, row, defaultValue, min
 
     return (
         <React.Fragment>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-1">
                 {label && <Form.Label>{label}</Form.Label>}
                 {type === "rte" ? (
                     <Editor
@@ -44,8 +44,12 @@ const InputField = ({ label, type, placeholder, setValue, row, defaultValue, min
                             return(<option key={index} value={item.Id}>{item.Exercise_Name}</option>)
                         })}
                     </Form.Select>
+                ) : type === "image" ? (
+                    <Image src={defaultValue} style={{ height: 100, width: 100 }} className="form-control"/>
+                ) : type === "video" ? (
+                    <video src={defaultValue}/>
                 ) : (
-                    <Form.Control type={type} placeholder={placeholder} defaultValue={defaultValue} min={min} {...props} />
+                    <Form.Control type={type} placeholder={placeholder} defaultValue={defaultValue} min={min} accept={accept} {...props} />
                 )}
                 <span className="error text-danger d-block">{errors && errors.message}</span>
             </Form.Group>
