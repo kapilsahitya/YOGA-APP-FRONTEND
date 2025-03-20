@@ -58,7 +58,7 @@ const Discover = () => {
                         Action: 1
                     }])
                 })
-            }else if(data.discovers.length < 1){
+            } else if (data.discovers.length < 1) {
                 setErrormsg(data.message);
             }
         } else {

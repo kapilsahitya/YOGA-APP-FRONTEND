@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { PageTrafficTable } from "../../components/Tables";
 import InputField from "../../utils/InputField";
-import { getAPIData } from "../../utils/getAPIData";
+import { getAPIData, postAPIData } from "../../utils/getAPIData";
 import { toast } from "react-toastify";
 
 const Plan = () => {
@@ -29,8 +29,11 @@ const Plan = () => {
     } = useForm();
 
     const handleClose = () => {
-        // setValue('categoryName');
-        // setValue('description');
+        setValue('planName');
+        setValue('price');
+        setValue('months');
+        setValue('sku_id_android');
+        setValue('sku_id_ios');
         setShowModal(false);
     }
 
@@ -43,9 +46,9 @@ const Plan = () => {
                 data.plan.map((item) => {
                     setPlanListData((prev) => [...prev, {
                         Id: item._id,
-                        Name: item.plan_name,
+                        PlanName: item.plan_name,
                         Price: item.price,
-                        Month: item.months,
+                        Months: item.months,
                         SKU_ID_Android: item.sku_id_android,
                         SKU_ID_IOS: item.sku_id_ios,
                         Action: 1
@@ -70,43 +73,43 @@ const Plan = () => {
     }, []);
 
     const updateData = async (values) => {
-        // let { data, error, status } = await postAPIData(`/updateCategory/${updateUser.Id}`, values, token);
+        let { data, error, status } = await postAPIData(`/updatePlan/${updatePlan.Id}`, values, token);
 
-        // if (!error) {
-        //     toast.success("Update was successful!", { position: "top-center", autoClose: 2500 });
-        //     fetchData();
-        // } else {
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
-        //         navigate('/');
-        //     } else if (status === 400) {
-        //         toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
-        //     } else {
-        //         toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
-        //     }
-        // }
-        // handleClose();
+        if (!error) {
+            toast.success("Update was successful!", { position: "top-center", autoClose: 2500 });
+            fetchData();
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
+                navigate('/');
+            } else if (status === 400) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 });
+            } else {
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 });
+            }
+        }
+        handleClose();
     }
 
     const deleteData = async () => {
-        // let { data, error, status } = await postAPIData(`/deleteCategory/${deleteUser.Id}`, null, token);
+        let { data, error, status } = await postAPIData(`/deletePlan/${deletePlan.Id}`, null, token);
 
-        // if (!error) {
-        //     fetchData();
-        //     toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
-        // } else {
-        //     if (status === 401) {
-        //         localStorage.removeItem('token');
-        //         toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
-        //         navigate('/');
-        //     } else if (status === 400) {
-        //         toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
-        //     } else {
-        //         toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
-        //     }
-        // }
-        // setDeleteUser({ Id: 0, IsConfirmed: false })
+        if (!error) {
+            fetchData();
+            toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+                navigate('/');
+            } else if (status === 400) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+            } else {
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
+            }
+        }
+        setDeletePlan({ Id: 0, IsConfirmed: false })
     }
 
     return (
@@ -133,7 +136,7 @@ const Plan = () => {
                             type="text"
                             label="Plan Name"
                             placeholder="Plan Name"
-                            // defaultValue={updateUser?.Category}
+                            defaultValue={updatePlan?.PlanName}
                             errors={errors['planName']}
                             {...register('planName', { required: "Plan is required." })}
                         />
@@ -142,6 +145,7 @@ const Plan = () => {
                             label="Price"
                             type="number"
                             placeholder="Price"
+                            defaultValue={updatePlan?.Price}
                             errors={errors['price']}
                             {...register('price', { required: "Price is required." })}
                         />
@@ -150,24 +154,27 @@ const Plan = () => {
                             label="Months"
                             type="number"
                             placeholder="Months"
-                            errors={errors['month']}
-                            {...register('month', { required: "Month is required." })}
+                            defaultValue={updatePlan?.Months}
+                            errors={errors['months']}
+                            {...register('months', { required: "Month is required." })}
                         />
 
                         <InputField
                             label="SKU ID Android"
                             type="text"
                             placeholder="SKU ID Android"
-                            errors={errors['skuidand']}
-                            {...register('skuidand', { required: "SKU ID - ANDROID is required." })}
+                            defaultValue={updatePlan?.SKU_ID_Android}
+                            errors={errors['sku_id_android']}
+                            {...register('sku_id_android', { required: "SKU ID - ANDROID is required." })}
                         />
 
                         <InputField
                             label="SKU ID IOS"
                             type="text"
                             placeholder="SKU ID IOSe"
-                            errors={errors['skuidios']}
-                            {...register('skuidios', { required: "SKU ID - IOS is required." })}
+                            defaultValue={updatePlan?.SKU_ID_IOS}
+                            errors={errors['sku_id_ios']}
+                            {...register('sku_id_ios', { required: "SKU ID - IOS is required." })}
                         />
                     </Modal.Body>
                     <Modal.Footer>

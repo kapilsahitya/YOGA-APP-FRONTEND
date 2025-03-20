@@ -3,6 +3,8 @@ import InputField from "../../utils/InputField";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postAPIData } from "../../utils/getAPIData";
+import { toast } from "react-toastify";
 
 const AddPlan = () => {
     const {
@@ -15,8 +17,26 @@ const AddPlan = () => {
 
     let token = localStorage.getItem('token');
 
-    const submitData = () => {
+    const submitData = async (values) => {
+        setDeactive(true);
+        let { data, error, status } = await postAPIData('/addplan', values, token);
 
+        if (!error) {
+            if (status === 201) {
+                toast.success(`${data.message}`, { position: "top-center", autoClose: 2500 })
+                navigate('/admin/plan');
+            }
+        } else {
+            if (status === 401) {
+                localStorage.removeItem('token');
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+                navigate('/');
+            } else if (status === 400) {
+                toast.error(`${data.message}`, { position: "top-center", autoClose: 2500 })
+            } else {
+                toast.error("Something went wrong.", { position: "top-center", autoClose: 2500 })
+            }
+        }
     }
 
     return (
@@ -44,24 +64,24 @@ const AddPlan = () => {
                         label="Months"
                         type="number"
                         placeholder="Months"
-                        errors={errors['month']}
-                        {...register('month', { required: "Month is required." })}
+                        errors={errors['months']}
+                        {...register('months', { required: "Month is required." })}
                     />
 
                     <InputField
                         label="SKU ID Android"
                         type="text"
                         placeholder="SKU ID Android"
-                        errors={errors['skuidand']}
-                        {...register('skuidand', { required: "SKU ID - ANDROID is required." })}
+                        errors={errors['sku_id_android']}
+                        {...register('sku_id_android', { required: "SKU ID - ANDROID is required." })}
                     />
 
                     <InputField
                         label="SKU ID IOS"
                         type="text"
-                        placeholder="SKU ID IOSe"
-                        errors={errors['skuidios']}
-                        {...register('skuidios', { required: "SKU ID - IOS is required." })}
+                        placeholder="SKU ID IOS"
+                        errors={errors['sku_id_ios']}
+                        {...register('sku_id_ios', { required: "SKU ID - IOS is required." })}
                     />
                     <Button variant="primary" type="submit" className="mt-4" disabled={deactive}>
                         Add Plan
