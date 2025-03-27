@@ -54,7 +54,7 @@ const Discover = () => {
                                 discoverid: item._id,
                             },
                         },
-                        Pro: item.isActive,
+                        Pro: item.isPro,
                         Action: 1
                     }])
                 })
