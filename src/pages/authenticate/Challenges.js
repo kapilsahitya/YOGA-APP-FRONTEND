@@ -55,7 +55,7 @@ const Challenges = () => {
                                 challengesid: item._id,
                             },
                         },
-                        Pro: item.isActive,
+                        Pro: item.isPro,
                         Action: 1
                     }])
                 })
