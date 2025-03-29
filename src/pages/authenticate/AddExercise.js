@@ -70,8 +70,8 @@ const AddExercise = () => {
                         {...register('image', {
                             required: "Exercise image is required.", validate: (file) => {
                                 const image = file[0];
-                                if (image.size > 100 * 1024) {
-                                    return "File size must be less than 100 KB";
+                                if (image.size > (1024 * 1024)) {
+                                    return "File size must be less than 1MB";
                                 }
                                 return true;
                             }
@@ -83,7 +83,7 @@ const AddExercise = () => {
                         type="file"
                         errors={errors['video']}
                         accept="video/mp4,video/x-m4v,video/*"
-                        {...register('video', { required: "Exercise video is required." })}
+                        {...register('video')}
                     />
 
                     <InputField
