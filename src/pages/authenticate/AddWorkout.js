@@ -69,7 +69,7 @@ const AddWorkout = () => {
                         {...register('image', {
                             required: "Workout image is required.", validate: (file) => {
                                 const image = file[0];
-                                if (image.size > 100 * 1024) {
+                                if (image.size > 1024 * 1024) {
                                     return "File size must be less than 100 KB";
                                 }
                                 return true;
