@@ -18,6 +18,7 @@ const Categories = () => {
         IsConfirmed: false
     });
     const [errormsg, setErrormsg] = useState('');
+    const [deactive, setDeactive] = useState(false);
     const navigate = useNavigate();
     let token = localStorage.getItem('token');
 
@@ -98,6 +99,7 @@ const Categories = () => {
     }
 
     const deleteData = async () => {
+        setDeactive(true);
         let { data, error, status } = await postAPIData(`/deleteCategory/${deleteUser.Id}`, null, token);
 
         if (!error) {
@@ -216,11 +218,25 @@ const Categories = () => {
                     <Button variant="secondary" onClick={() => setDeleteUser({ Id: 0, IsConfirmed: false })}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={deleteData}>
+                    <Button variant="primary" onClick={deleteData} disabled={deactive}>
                         Confirm Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
+             <table style={{ width: "100%", border: "1px solid black" }}>
+      <thead>
+        <tr>
+          <th style={{ width: "20%" }}>Column 1</th>
+          <th style={{ width: "80%" }}>Column 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+        </tr>
+      </tbody>
+    </table>
         </React.Fragment>
     )
 };
