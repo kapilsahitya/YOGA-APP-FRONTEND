@@ -45,7 +45,7 @@ const Categories = () => {
                     setCategoriesData((prev) => [...prev, {
                         Id: item._id,
                         Image: item.image,
-                        Category: item.category,
+                        'Meditation Styles': item.category,
                         Description: item.description,
                         View_Exercise: {
                             label: "View Exercise",
@@ -138,7 +138,8 @@ const Categories = () => {
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/category/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Category
+                {/* <FontAwesomeIcon icon={faPlus} /> Add New Category */}
+                <FontAwesomeIcon icon={faPlus} /> Add New Meditation Styles
             </Button>
             {categoriesData.length > 0 ?
                 <PageTrafficTable
@@ -223,20 +224,6 @@ const Categories = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-             <table style={{ width: "100%", border: "1px solid black" }}>
-      <thead>
-        <tr>
-          <th style={{ width: "20%" }}>Column 1</th>
-          <th style={{ width: "80%" }}>Column 2</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Data 1</td>
-          <td>Data 2</td>
-        </tr>
-      </tbody>
-    </table>
         </React.Fragment>
     )
 };

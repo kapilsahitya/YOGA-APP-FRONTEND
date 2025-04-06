@@ -45,7 +45,7 @@ const QuickWorkout = () => {
                     setWorkoutData((prev) => [...prev, {
                         Id: item._id,
                         Image: item.image,
-                        Quick_Workout: item.quickworkout,
+                        Yoga_Styles: item.quickworkout,
                         Description: item.description,
                         View_Exercise: {
                             label: "View Exercise",
@@ -142,7 +142,7 @@ const QuickWorkout = () => {
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/workout/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Quick Workout
+                <FontAwesomeIcon icon={faPlus} /> Add New Yoga Styles
             </Button>
             {workoutData.length > 0 ?
                 <PageTrafficTable

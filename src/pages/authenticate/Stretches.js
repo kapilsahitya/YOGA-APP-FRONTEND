@@ -45,7 +45,7 @@ const Stretches = () => {
                     setStretchesData((prev) => [...prev, {
                         Id: item._id,
                         Image: item.image,
-                        Stretches: item.stretches,
+                        Body_Fitness: item.stretches,
                         Description: item.description,
                         View_Exercise: {
                             label: "View Exercise",
@@ -143,7 +143,7 @@ const Stretches = () => {
     return (
         <React.Fragment>
             <Button variant="primary" className="my-2" onClick={() => navigate('/admin/stretches/add')}>
-                <FontAwesomeIcon icon={faPlus} /> Add New Stretches
+                <FontAwesomeIcon icon={faPlus} /> Add New Body Fitness
             </Button>
             {stretchesData.length > 0 ?
                 <PageTrafficTable
